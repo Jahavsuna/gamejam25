@@ -10,7 +10,7 @@ var monster_node: Node2D = null
 var track_node: Node2D = null
 var screen_width: int = 0
 var screen_height: int = 0
-var horizon_y: float = 0 # Half screen
+var horizon_y: float = 0
 
 func _ready() -> void:
 	print("GameGlobals is ready")
