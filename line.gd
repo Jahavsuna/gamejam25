@@ -4,6 +4,10 @@ const MIN_X = -100
 const MAX_X = 740 # 640 + 100
 const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 
+@export var base_outer_width: int = 90
+@export var base_edge_width: int = 20
+@export var base_road_width: int = 420
+
 @export var outer_width: int = 90
 @export var edge_width: int = 20
 @export var road_width: int = 420
@@ -27,20 +31,21 @@ func _config_colors() -> void:
 	else:
 		outer_color = Color.SLATE_GRAY
 
-func _config_sizes() -> void:
+func update_size() -> void:
 	var length_change = tan(VISION_ANGLE_RAD) * (GameGlobals.screen_height - self.position.y)
-	outer_width += length_change
-	road_width -= 2 * length_change
+	outer_width = base_outer_width + length_change
+	road_width = base_road_width - 2 * length_change
+	queue_redraw()
 
 func configure_parameters() -> void:
 	# TODO: add texture instead of manual lines
 	_config_colors()
-	_config_sizes()
+	update_size()
 
 func _draw() -> void:
 	var ttl_len = 2 * outer_width + 2 * edge_width + road_width
 	if ttl_len - 640 > 1:
-		print("Warning: bade line width: " + str(ttl_len))
+		print("Warning: bad line width: " + str(ttl_len))
 	if outer_color == null or edge_color == null or road_color == null:
 		print("ERROR: Line has no defined colors.")
 	var outer_start = Vector2(MIN_X, y_offset)
