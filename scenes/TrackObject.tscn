@@ -1,3 +1,3 @@
-[gd_scene load_steps=0 format=3 uid="uid://biyus3ht0dcjo"]
+[gd_scene format=3 uid="uid://biyus3ht0dcjo"]
 
 [node name="TrackObject" type="Node2D"]

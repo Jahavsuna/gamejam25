@@ -1,5 +1,6 @@
 extends Area2D
 class_name loop_zone
+var loop_to_segment:int = 0
 
 @export var target_coordinate: int = 0:
 	set(value):

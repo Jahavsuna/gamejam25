@@ -45,15 +45,17 @@ func track_obj_sort(a, b):
 	return a.y < b.y
 	   
 
-
 func _load_nth_track_data(n) -> void:
 	var cur_track = track_data[n]
+	if not "objects" in cur_track: return
+	
 	var objects_arr = cur_track["objects"]
 	var objects = []
 	for obj in objects_arr:
 		var new_obj = null		
 		if obj[0] == "LoopZone":
 			new_obj = loop_zone_scene.instantiate()
+			new_obj.loop_to_segment = obj[3]
 		elif obj[0] == "Gate":
 			new_obj  = gate.instantiate()
 			
@@ -85,6 +87,9 @@ func _get_line_track_offset(line: Node2D) -> float:
 	var line_track_offset = (1 - line_y_portion) * GameGlobals.TRACK_PER_SCREEN
 	return line_track_offset
 
+func set_active_segment(seg_i:int):
+	active_segment = seg_i
+
 func _physics_process(delta: float) -> void:
 	# Avoid running this befor the function is ready
 	if not GameGlobals.is_screen_size_ready: return
@@ -95,6 +100,8 @@ func _physics_process(delta: float) -> void:
 	if start_coordinate > segment_ends[active_segment]:
 		print("Segment advanced!")
 		active_segment += 1
+		_load_nth_track_data(active_segment)
+		print("Current Segment = ", active_segment)
 	
 	# Define offset parameters
 	var line_ddx = 0
