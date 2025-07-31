@@ -3,7 +3,7 @@ extends Node2D
 
 const LINES_PER_SCREEN: int = 120
 const LINE_WIDTH: int = 2
-const LINE_COLOR_SWICTH: int = 8
+const LINE_COLOR_SWICTH: int = 30
 
 var player_node: Node2D = null
 var track_node: Node2D = null

@@ -2,11 +2,11 @@ extends Node2D
 
 const MIN_X = -100
 const MAX_X = 740 # 640 + 100
-const VISION_ANGLE_RAD: float = 15 * 3.14 / 180
+const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 
-@export var outer_width: int = 110
+@export var outer_width: int = 90
 @export var edge_width: int = 20
-@export var road_width: int = 380
+@export var road_width: int = 420
 
 @export var outer_color: Color
 @export var edge_color: Color
