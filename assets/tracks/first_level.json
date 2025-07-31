@@ -1,11 +1,11 @@
 [
 	{
 		"type": "straight",
-		"length": 500.0,
+		"length": 30.0,
 	},
 	{
 		"type": "curve",
-		"length": 200.0,
+		"length": 500.0,
 		"dx": -0.001,
 		"ddx": -0.001,
 	},
@@ -22,16 +22,16 @@
 	},
 	{
 		"type": "straight",
-		"length": 200.0
+		"length": 200.0,
 	},
 	{
 		"type": "curve",
-		"length": 150.0,
+		"length": 100.5,
 		"dx": 0.003,
 		"ddx": 0.0,
 	},
 	{
 		"type": "straight",
-		"length": 1000.0
+		"length": 100.0,
 	}
 ]
