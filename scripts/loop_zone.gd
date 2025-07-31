@@ -23,4 +23,4 @@ func _update_zone_collision() -> void:
 func _on_body_entered(body: PhysicsBody2D) -> void:
 	if body.name == 'Player':
 		# TODO: move the player coordinate, then get monster coordinate and update it accordingly.
-		pass
+		print("loopzoneencounter")
