@@ -36,7 +36,12 @@ func get_player_track_coordinate() -> int:
 	if player_node == null:
 		push_error("Attempted to get player track_coord, but player doesn't exist.")
 	return player_node.track_coordinate
-	
+
+func get_player_track_speed() -> int:
+	if player_node == null:
+		push_error("Attempted to get player track_coord, but player doesn't exist.")
+	return player_node.track_speed
+
 func register_track(track: Node2D) -> void:
 	if track_node != null:
 		push_warning("A track node is already registered. Overwriting.")
