@@ -49,12 +49,18 @@ func _generate_track() -> void:
 		current_line.queue_redraw()
 
 func _physics_process(_delta: float) -> void:
+	# Get player data to know how to advance
 	var translation_speed = GameGlobals.get_player_track_speed()
 	var start_coordinate = GameGlobals.get_player_track_coordinate()
 	var end_coordinate = start_coordinate + GameGlobals.LINES_PER_SCREEN
-	return
+	
+	# Advance all lines based on the speed
 	for line in track_lines:
 		line.translate(Vector2(0, translation_speed))
+		# if the line leaves the screen, add a new line on top
+		if line.position.y - GameGlobals.LINE_WIDTH > screen_y_base:
+			line.position.y -= GameGlobals.LINES_PER_SCREEN * GameGlobals.LINE_WIDTH
+		line.update_size()
 	#var lines_to_plot = track_lines.slice(start_coordinate, end_coordinate)
 	# Called every frame
 	# draw the allowed number of lines
