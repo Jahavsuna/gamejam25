@@ -2,6 +2,12 @@
 	{
 		"type": "straight",
 		"length": 500.0,
+		"objects": [
+			["LoopZone", 50, 0],
+			["LoopZone", 100, 20],
+			["LoopZone", 150, -30],
+			["LoopZone", 200, 55],
+		]
 	},
 	{
 		"type": "curve",
