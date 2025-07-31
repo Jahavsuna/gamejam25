@@ -49,6 +49,14 @@ func configure_parameters() -> void:
 	_config_colors()
 	update_size()
 
+func index_from_bottom() -> int:
+	"""Estimate how far ahead the line is from the player."""
+	if not GameGlobals.is_screen_size_ready: return 0
+	var relative_height = GameGlobals.screen_height - self.position.y
+	var estimated_idx = relative_height / line_width
+	var floored_idx = int(estimated_idx)
+	return floored_idx
+
 func _draw() -> void:
 	var ttl_len = 2 * outer_width + 2 * edge_width + road_width
 	if ttl_len - 640 > 1:
