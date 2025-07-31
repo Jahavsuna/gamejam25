@@ -6,6 +6,7 @@ const LINE_WIDTH: int = 2
 const LINE_COLOR_SWICTH: int = 30
 
 var player_node: Node2D = null
+var monster_node: Node2D = null
 var track_node: Node2D = null
 var screen_width: int = 0
 var screen_height: int = 0
@@ -19,11 +20,22 @@ func update_screen_size() -> void:
 	screen_height = get_viewport_rect().size.y
 	horizon_y = LINES_PER_SCREEN * LINE_WIDTH
 
+func register_monster(monster: Node2D) -> void:
+	if monster_node != null:
+		push_warning("A monster node is already registered. Overwriting.")
+	monster_node = monster
+	print("Player registered")
+
 func register_player(player: Node2D) -> void:
 	if player_node != null:
 		push_warning("A player node is already registered. Overwriting.")
 	player_node = player
 	print("Player registered")
+
+func get_player_track_coordinate() -> int:
+	if player_node == null:
+		push_error("Attempted to get player track_coord, but player doesn't exist.")
+	return player_node.track_coordinate
 	
 func register_track(track: Node2D) -> void:
 	if track_node != null:
