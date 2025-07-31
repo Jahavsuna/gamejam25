@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxevymmedbmn5"]
+
+[ext_resource type="Texture2D" uid="uid://djysynqmuusws" path="res://assets/textures/gravel.jpg" id="1_poewy"]
+
+[node name="RoadSegment" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_poewy")
+region_enabled = true
+region_rect = Rect2(-8, 3824, 5768, 16)
