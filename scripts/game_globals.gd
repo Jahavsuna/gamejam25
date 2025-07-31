@@ -1,13 +1,16 @@
 # This script is an Autoload
 extends Node2D
 
-const _HORIZON_FRACTION: float = 0.5
+const LINES_PER_SCREEN: int = 40
+const LINE_WIDTH: int = 2
+const LINE_COLOR_SWICTH: int = 8
 
 var player_node: Node2D = null
 var track_node: Node2D = null
 var screen_width: int = 0
 var screen_height: int = 0
 var horizon_y: float = 0 # Half screen
+var lines_per_screen: int = -1
 
 func _ready() -> void:
 	print("GameGlobals is ready")
@@ -15,7 +18,7 @@ func _ready() -> void:
 func update_screen_size() -> void:
 	screen_width = get_viewport_rect().size.x
 	screen_height = get_viewport_rect().size.y
-	horizon_y = -1 * _HORIZON_FRACTION * screen_height
+	horizon_y = -1 * LINES_PER_SCREEN * LINE_WIDTH
 
 func register_player(player: Node2D) -> void:
 	if player_node != null:

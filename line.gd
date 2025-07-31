@@ -13,7 +13,7 @@ const MAX_X = 740 # 640 + 100
 
 @export var x_offset: float = 0.0
 @export var y_offset: float = 0.0
-@export var line_width: int = 8
+@export var line_width: int = GameGlobals.LINE_WIDTH
 
 func _ready() -> void:
 	pass
