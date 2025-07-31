@@ -37,25 +37,10 @@ func update_size() -> void:
 	road_width = base_road_width - 2 * length_change
 	queue_redraw()
 
-func curve(dx, ddx) -> void:
-	# Curves according to the function x = ddx*y^2 + dx*y
-	if GameGlobals.screen_height == null: return
-	var relative_y_pos = position.y - GameGlobals.screen_height
-	x_offset = ddx * (relative_y_pos ** 2) + dx * relative_y_pos
-	queue_redraw()
-
 func configure_parameters() -> void:
 	# TODO: add texture instead of manual lines
 	_config_colors()
 	update_size()
-
-func index_from_bottom() -> int:
-	"""Estimate how far ahead the line is from the player."""
-	if not GameGlobals.is_screen_size_ready: return 0
-	var relative_height = GameGlobals.screen_height - self.position.y
-	var estimated_idx = relative_height / line_width
-	var floored_idx = int(estimated_idx)
-	return floored_idx
 
 func _draw() -> void:
 	var ttl_len = 2 * outer_width + 2 * edge_width + road_width
