@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj08in37bjh5t"]
+
+[ext_resource type="Texture2D" uid="uid://24e2rpgmjrcd" path="res://assets/textures/obstacle_gate_1.png" id="1_o8svw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agosa"]
+size = Vector2(25, 21)
+
+[node name="GateObstacle" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_o8svw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_agosa")

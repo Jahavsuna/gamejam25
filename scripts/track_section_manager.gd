@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var loop_zone_scene = preload("res://scenes/LoopZone.tscn")
+@onready var gate = preload("res://scenes/GateObstacle.tscn")
 
 const TRACK_DATA_FILE: String = "res://assets/tracks/first_level.json"
 var track_data: Array = []
@@ -45,15 +46,16 @@ func _load_nth_track_data(n) -> void:
 	var type = cur_track["type"]	
 	var objects = [] 
 	for obj in objects_arr:
+		var new_obj
 		if obj[0] == "LoopZone":
-			print (obj)
-			var new_loop_zone:loop_zone = loop_zone_scene.instantiate()
-			new_loop_zone.visibility_layer = 100000;
-			new_loop_zone.position = Vector2(obj[2] + GameGlobals.screen_width/2, obj[1])
-			add_child(new_loop_zone)
-			print (new_loop_zone, new_loop_zone.position)
+			new_obj = loop_zone_scene.instantiate()
+		elif obj[0] == "Gate":
+			new_obj  = gate.instantiate()
 			
-	
+		new_obj.visibility_layer = 100000;
+		new_obj.position = Vector2(obj[2] + GameGlobals.screen_width/2, obj[1])
+		add_child(new_obj)
+		
 func _generate_track() -> void:
 	print("Generating track from data")
 	var line_accumulator = 0
