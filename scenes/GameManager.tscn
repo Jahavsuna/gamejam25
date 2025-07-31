@@ -16,3 +16,5 @@ position = Vector2(312, 302)
 
 [node name="LoopZone" parent="." instance=ExtResource("4_3dus2")]
 position = Vector2(170, 80)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

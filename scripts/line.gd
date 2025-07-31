@@ -37,13 +37,6 @@ func update_size() -> void:
 	road_width = base_road_width - 2 * length_change
 	queue_redraw()
 
-func curve(dx, ddx) -> void:
-	# Curves according to the function x = ddx*y^2 + dx*y
-	if GameGlobals.screen_height == null: return
-	var relative_y_pos = position.y - GameGlobals.screen_height
-	x_offset = ddx * (relative_y_pos ** 2) + dx * relative_y_pos
-	queue_redraw()
-
 func configure_parameters() -> void:
 	# TODO: add texture instead of manual lines
 	_config_colors()
