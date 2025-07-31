@@ -11,7 +11,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	track_coordinate += GameGlobals.track_speed * delta
 
-
 func _process(delta):
 	direction = Vector2.ZERO
 	# Detect continuous movement input using UI actions (configured in Project Settings -> Input Map)
