@@ -5,9 +5,9 @@
 	},
 	{
 		"type": "curve",
-		"direction": "right",
 		"length": 200.0,
-		"strength": 0.02,
+		"dx": -0.001,
+		"ddx": -0.001,
 	},
 	{
 		"type": "straight",
@@ -15,9 +15,9 @@
 	},
 	{
 		"type": "curve",
-		"direction": "left",
 		"length": 400.0,
-		"strength": 0.015,
+		"dx": -0.0,
+		"ddx": 0.01,
 		"obstacle_spawn_rate": 0.5
 	},
 	{
@@ -26,9 +26,9 @@
 	},
 	{
 		"type": "curve",
-		"direction": "right",
 		"length": 150.0,
-		"strength": 0.03
+		"dx": 0.003,
+		"ddx": 0.0,
 	},
 	{
 		"type": "straight",
