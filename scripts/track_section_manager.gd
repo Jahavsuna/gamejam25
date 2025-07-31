@@ -5,17 +5,7 @@ var track_lines: Array[Node2D] = []
 var track_data: Array = []
 var segment_ends: Array = []
 var active_segment = 0
-var screen_y_base: int = 0
-
-# TODO: rename once I manage to use those
-var segment_0: Dictionary = {
-	'y': 0,
-	'dy': 1,
-}
-var segment_1: Dictionary = {
-	'y': 0,
-	'dy': 1,
-}
+var lowest_line_idx: int = 0
 
 const LineScene: PackedScene = preload("res://scenes/Line.tscn")
 
@@ -23,7 +13,6 @@ func _ready() -> void:
 	GameGlobals.register_track(self)
 	if GameGlobals.screen_height == 0:
 		GameGlobals.update_screen_size()
-	screen_y_base = GameGlobals.screen_height
 	_load_track_data()
 	_generate_track()
 
@@ -48,57 +37,58 @@ func _generate_track() -> void:
 	for iline in range(GameGlobals.LINES_PER_SCREEN):
 		var current_line = LineScene.instantiate()
 		current_line.position.x = 0
-		current_line.position.y = -line_accumulator + screen_y_base
+		current_line.position.y = GameGlobals.screen_height - line_accumulator
 		current_line.configure_parameters()
 		line_accumulator += current_line.line_width
 		track_lines.append(current_line)
 		add_child(current_line)
 		current_line.queue_redraw()
 
-func _extract_curve_params(segment: Dictionary) -> Array:
-	var dx: float
-	var ddx: float
-	if segment["type"] == "straight":
-		dx = 0
-		ddx = 0
-	if segment["type"] == "curve":
-		dx = segment["dx"]
-		ddx = segment["ddx"]
-	return [dx, ddx]
+func _get_line_track_offset(line: Node2D) -> float:
+	var line_y_span = line.position.y - GameGlobals.horizon_y
+	var screen_y_span = GameGlobals.screen_height - GameGlobals.horizon_y
+	var line_y_portion = line_y_span / screen_y_span
+	var line_track_offset = (1 - line_y_portion) * GameGlobals.TRACK_PER_SCREEN
+	return line_track_offset
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Avoid running this befor the function is ready
 	if not GameGlobals.is_screen_size_ready: return
 	
-	# Get player data to know how to advance
+	# Get player data and advance segment if needed
 	var translation_speed = GameGlobals.get_player_track_speed()
 	var start_coordinate = GameGlobals.get_player_track_coordinate()
-	var end_coordinate = start_coordinate + GameGlobals.LINES_PER_SCREEN
-	
-	# Advance segment if needed
 	if start_coordinate > segment_ends[active_segment]:
+		print("Segment advanced!")
 		active_segment += 1
 	
-	# Advance all lines based on the speed
-	for line in track_lines:
-		line.translate(Vector2(0, translation_speed))
+	# Define offset parameters
+	var line_ddx = 0
+	var line_dx = 0
+	
+	# Iterate over all lines from bottom to top
+	for _iline in range(lowest_line_idx, lowest_line_idx + GameGlobals.LINES_PER_SCREEN):
+		var iline = _iline % GameGlobals.LINES_PER_SCREEN
+		var line = track_lines[iline]
 		
-		# if the line leaves the screen, add a new line on top
-		if line.position.y - GameGlobals.LINE_WIDTH > screen_y_base:
-			line.position.y -= GameGlobals.LINES_PER_SCREEN * GameGlobals.LINE_WIDTH
-		
-		# Find segment for this line
-		var line_track_coord = start_coordinate + line.index_from_bottom()
-		var current_segment_parameters
-		# TODO: this may break when looping via the zones
+		# Advance all lines, and loop if necessary
+		line.translate(Vector2(0, translation_speed * delta))
+		if line.position.y + line.line_width > GameGlobals.screen_height:
+			line.position.y -= line.line_width * GameGlobals.LINES_PER_SCREEN
+			lowest_line_idx = (lowest_line_idx + 1) % GameGlobals.LINES_PER_SCREEN
+	
+	# Iterate after reordering
+	for _iline in range(lowest_line_idx, lowest_line_idx + GameGlobals.LINES_PER_SCREEN):
+		var iline = _iline % GameGlobals.LINES_PER_SCREEN
+		var line = track_lines[iline]
+		# Calculate the linex offset based on segment
+		var line_track_coord = start_coordinate + _get_line_track_offset(line)
 		if line_track_coord >= segment_ends[active_segment]:
-			current_segment_parameters = track_data[active_segment + 1]
+			line_dx = track_data[active_segment + 1]["dx"]
 		else:
-			current_segment_parameters = track_data[active_segment]
+			line_dx = track_data[active_segment]["dx"]
+		line_ddx += line_dx
 		
-		# Curve the line
-		var params: Array
-		params = _extract_curve_params(current_segment_parameters)
-		# If the line is part of a curve, act accordingly
-		line.curve(params[0], params[1])
+		# Offset the line
+		line.x_offset = line_ddx
 		line.update_size()
