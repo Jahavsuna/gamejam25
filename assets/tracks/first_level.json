@@ -2,11 +2,11 @@
 	{
 		"length": 30.0,
 		"dx": 0.0,
-    "objects": [
-			["Gate", -150, 0],
-			["LoopZone", -200, 20],
-			["Gate", -250, -30],
-			["LoopZone", -400, 55],
+	"objects": [
+			["Gate", -15, 0],
+			["LoopZone", -20, 20],
+			["Gate", -25, -30],
+			["LoopZone", -40, 55],
 		]
 	},
 	{

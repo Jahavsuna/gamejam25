@@ -48,10 +48,8 @@ func track_obj_sort(a, b):
 
 func _load_nth_track_data(n) -> void:
 	var cur_track = track_data[n]
-	var objects_arr = cur_track["objects"]	
-	var length = cur_track["length"]	
-	var type = cur_track["type"]	
-	var objects = [] 
+	var objects_arr = cur_track["objects"]
+	var objects = []
 	for obj in objects_arr:
 		var new_obj = null		
 		if obj[0] == "LoopZone":
@@ -92,7 +90,7 @@ func _physics_process(delta: float) -> void:
 	if not GameGlobals.is_screen_size_ready: return
 	
 	# Get player data and advance segment if needed
-  var translation_speed = GameGlobals.track_speed
+	var translation_speed = GameGlobals.track_speed
 	var start_coordinate = GameGlobals.get_player_track_coordinate()
 	if start_coordinate > segment_ends[active_segment]:
 		print("Segment advanced!")
