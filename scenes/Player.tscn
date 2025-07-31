@@ -126,7 +126,6 @@ script/source = "extends CollisionShape2D
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is loop_zone:
 		print(\"loop zone\")	
-	
 "
 
 [node name="Player" type="Node2D"]

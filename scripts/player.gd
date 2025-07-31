@@ -21,6 +21,7 @@ func _process(delta):
 	if Input.is_action_pressed("ui_right"):
 		self.direction.x += 1
 	
+	self.direction.y += .5
 	if GameGlobals.DEBUG:
 		if Input.is_action_pressed("ui_up"):
 			self.direction.y -= 1
