@@ -1,14 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://gplegsrlm5ps"]
+[gd_scene load_steps=3 format=3 uid="uid://gplegsrlm5ps"]
 
 [ext_resource type="PackedScene" uid="uid://clqbjkacmhvqe" path="res://scenes/GameManager.tscn" id="1_rus8k"]
-[ext_resource type="PackedScene" uid="uid://cr0hgvkywp0s6" path="res://scenes/track.tscn" id="2_5xbjy"]
 [ext_resource type="Texture2D" uid="uid://drnd05c60mvcr" path="res://assets/textures/sky_small.png" id="3_rus8k"]
 
 [node name="Level1" type="Node2D"]
-
-[node name="GameManager" parent="." instance=ExtResource("1_rus8k")]
-
-[node name="Track" parent="." instance=ExtResource("2_5xbjy")]
 
 [node name="background" type="Sprite2D" parent="."]
 position = Vector2(320, 97.1)
@@ -17,3 +12,5 @@ texture = ExtResource("3_rus8k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(320, 240)
+
+[node name="GameManager" parent="." instance=ExtResource("1_rus8k")]
