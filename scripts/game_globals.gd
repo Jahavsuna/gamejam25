@@ -47,3 +47,4 @@ func register_track(track: Node2D) -> void:
 		push_warning("A track node is already registered. Overwriting.")
 	track_node = track
 	print("Player registered")
+	
