@@ -7,10 +7,10 @@
 size = Vector2(639.5, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rus8k"]
-size = Vector2(16, 320)
+size = Vector2(16, 288)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xbjy"]
-size = Vector2(16, 320)
+size = Vector2(16, 288)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4nkto"]
 size = Vector2(674, 16)
@@ -32,19 +32,19 @@ position = Vector2(320, 240)
 [node name="TopWall" type="StaticBody2D" parent="WorldBounds"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/TopWall"]
-position = Vector2(320, 168)
+position = Vector2(320, 200)
 shape = SubResource("RectangleShape2D_bswci")
 
 [node name="LeftWall" type="StaticBody2D" parent="WorldBounds"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/LeftWall"]
-position = Vector2(-8, 320)
+position = Vector2(-8, 336)
 shape = SubResource("RectangleShape2D_rus8k")
 
 [node name="RightWall" type="StaticBody2D" parent="WorldBounds"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/RightWall"]
-position = Vector2(648, 320)
+position = Vector2(648, 336)
 shape = SubResource("RectangleShape2D_5xbjy")
 
 [node name="BottomWall" type="StaticBody2D" parent="WorldBounds"]
