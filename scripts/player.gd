@@ -2,7 +2,7 @@ extends Node2D
 
 var player_v:float = 50
 var track_coordinate: int = 0
-var track_speed: int = 0
+var track_speed: int = 2
 var direction:Vector2 = Vector2.ZERO
 
 func _ready() -> void:
@@ -21,17 +21,10 @@ func _process(delta):
 	if Input.is_action_pressed("ui_right"):
 		self.direction.x += 1
 	
-	self.direction.y += .5
+	self.direction.y += track_speed
 	if GameGlobals.DEBUG:
 		if Input.is_action_pressed("ui_up"):
-			self.direction.y -= 1
+			self.direction.y -= track_speed + 1
 		if Input.is_action_pressed("ui_down"):
 			self.direction.y += 1
 			
-
-func _on_area_entered(body):
-		print("some enter!")
-		if body.name == "Player":
-			print("Player entered the area!")
-			# Add code here to handle the player entering the area
-		
