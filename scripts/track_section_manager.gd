@@ -8,7 +8,10 @@ var screen_y_base: int = 0
 const LineScene: PackedScene = preload("res://scenes/Line.tscn")
 
 func _ready() -> void:
-	screen_y_base = -1 * get_viewport_rect().size.y
+	GameGlobals.register_track(self)
+	if GameGlobals.screen_height == 0:
+		GameGlobals.update_screen_size()
+	screen_y_base = -1 * GameGlobals.screen_height
 	_load_track_data()
 	_generate_track_from_data()
 
