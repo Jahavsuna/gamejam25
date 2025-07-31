@@ -28,5 +28,4 @@ func _process(delta: float) -> void:
 	self.scale += (Vector2(GameGlobals.scale_rate, GameGlobals.scale_rate)*delta/2)
 	if GameGlobals.player_node.position.y < self.position.y:
 		self.z_index = GameGlobals.player_node.z_index -1
-		#self.modulate.a = 0.3
 	
