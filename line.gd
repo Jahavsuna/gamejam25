@@ -2,6 +2,7 @@ extends Node2D
 
 const MIN_X = -100
 const MAX_X = 740 # 640 + 100
+const VISION_ANGLE_RAD: float = 15 * 3.14 / 180
 
 @export var outer_width: int = 110
 @export var edge_width: int = 20
@@ -18,9 +19,27 @@ const MAX_X = 740 # 640 + 100
 func _ready() -> void:
 	queue_redraw()
 
+func _config_colors(line_accumulator) -> void:
+	edge_color = Color.WHITE_SMOKE
+	road_color = Color.BLACK
+	if line_accumulator / GameGlobals.LINE_COLOR_SWICTH % 2 == 0:
+		outer_color = Color.DARK_SLATE_GRAY
+	else:
+		outer_color = Color.SLATE_GRAY
+
+func _config_sizes(line_accumulator) -> void:
+	var length_change = tan(VISION_ANGLE_RAD) * line_accumulator
+	outer_width += length_change
+	road_width -= 2 * length_change
+
+func configure_parameters(line_accumulator) -> void:
+	# TODO: add texture instead of manual lines
+	_config_colors(line_accumulator)
+	_config_sizes(line_accumulator)
+
 func _draw() -> void:
 	var ttl_len = 2 * outer_width + 2 * edge_width + road_width
-	if ttl_len != 640:
+	if ttl_len - 640 > 1:
 		print("Warning: bade line width: " + str(ttl_len))
 	if outer_color == null or edge_color == null or road_color == null:
 		print("ERROR: Line has no defined colors.")

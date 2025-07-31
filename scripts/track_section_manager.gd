@@ -26,16 +26,6 @@ func _load_track_data() -> void:
 		print("ERROR: Failed to load JSON from " + TRACK_DATA_FILE)
 	file.close()
 
-func _configure_line_colors(line: Node2D, line_accumulator: int) -> Node2D:
-	# TODO: add texture instead of manual lines
-	line.edge_color = Color.WHITE_SMOKE
-	line.road_color = Color.BLACK
-	if line_accumulator / GameGlobals.LINE_COLOR_SWICTH % 2 == 0:
-		line.outer_color = Color.DARK_SLATE_GRAY
-	else:
-		line.outer_color = Color.SLATE_GRAY
-	return line
-
 func _generate_track() -> void:
 	print("Generating track from data")
 	var line_accumulator = 0
@@ -43,7 +33,7 @@ func _generate_track() -> void:
 		var current_line = LineScene.instantiate()
 		current_line.position.x = 0
 		current_line.position.y = -line_accumulator + screen_y_base
-		current_line = _configure_line_colors(current_line, line_accumulator)
+		current_line.configure_parameters(line_accumulator)
 		line_accumulator += current_line.line_width
 		track_lines.append(current_line)
 		add_child(current_line)
