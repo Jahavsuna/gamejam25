@@ -11,9 +11,9 @@ func _ready() -> void:
 	GameGlobals.register_track(self)
 	if GameGlobals.screen_height == 0:
 		GameGlobals.update_screen_size()
-	screen_y_base = -1 * GameGlobals.screen_height
+	screen_y_base = GameGlobals.screen_height
 	_load_track_data()
-	_generate_track_from_data()
+	_generate_track()
 
 func _load_track_data() -> void:
 	var file = FileAccess.open(TRACK_DATA_FILE, FileAccess.READ)
@@ -36,19 +36,24 @@ func _configure_line_colors(line: Node2D, line_accumulator: int) -> Node2D:
 		line.outer_color = Color.SLATE_GRAY
 	return line
 
-func _generate_track_from_data() -> void:
+func _generate_track() -> void:
 	print("Generating track from data")
-	for current_section in track_data:
-		var line_accumulator = 0
-		for iline in range(int(current_section.length)):
-			var current_line = LineScene.instantiate()
-			current_line = _configure_line_colors(current_line, line_accumulator)
-			line_accumulator += current_line.line_width
-			current_line.position.x = 0
-			current_line.position.y = current_line.line_width * iline + screen_y_base
-			track_lines.append(current_line)
-			add_child(current_line) # TODO: this should be moved to where we actually want to plot.
+	var line_accumulator = 0
+	for iline in range(GameGlobals.LINES_PER_SCREEN):
+		var current_line = LineScene.instantiate()
+		current_line.position.x = 0
+		current_line.position.y = -line_accumulator + screen_y_base
+		current_line = _configure_line_colors(current_line, line_accumulator)
+		line_accumulator += current_line.line_width
+		track_lines.append(current_line)
+		add_child(current_line)
+		current_line.queue_redraw()
 
-
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
+	#var start_coordinate = GameGlobals.get_player_track_coordinate()
+	#var end_coordinate = start_coordinate + GameGlobals.LINES_PER_SCREEN
+	#var lines_to_plot = track_lines.slice(start_coordinate, end_coordinate)
+	# Called every frame
+	# draw the allowed number of lines
+	# trigonometry for line size
