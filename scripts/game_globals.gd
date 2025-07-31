@@ -1,9 +1,12 @@
 # This script is an Autoload
 extends Node2D
 
+var is_screen_size_ready: bool = false
+
 const LINES_PER_SCREEN: int = 120
 const LINE_WIDTH: int = 2
 const LINE_COLOR_SWICTH: int = 30
+const TRACK_PER_SCREEN: float = 10.0
 
 var player_node: Node2D = null
 var monster_node: Node2D = null
@@ -13,12 +16,14 @@ var screen_height: int = 0
 var horizon_y: float = 0
 
 func _ready() -> void:
+	is_screen_size_ready = false
 	print("GameGlobals is ready")
 
 func update_screen_size() -> void:
 	screen_width = get_viewport_rect().size.x
 	screen_height = get_viewport_rect().size.y
 	horizon_y = LINES_PER_SCREEN * LINE_WIDTH
+	is_screen_size_ready = true
 
 func register_monster(monster: Node2D) -> void:
 	if monster_node != null:

@@ -1,7 +1,7 @@
 extends Node2D
 
 var track_coordinate: int = 0
-var track_speed: int = 0
+var track_speed: int = 100
 
 func _ready() -> void:
 	GameGlobals.register_player(self)
@@ -9,7 +9,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	track_coordinate += track_speed * delta
-
 
 func _process(delta):
 	var direction = Vector2.ZERO

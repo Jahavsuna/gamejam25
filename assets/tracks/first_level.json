@@ -1,37 +1,31 @@
 [
 	{
-		"type": "straight",
 		"length": 30.0,
+		"dx": 0.0,
 	},
 	{
-		"type": "curve",
-		"length": 500.0,
-		"dx": -0.001,
-		"ddx": -0.001,
+		"length": 50.0,
+		"dx": -1.0,
 	},
 	{
-		"type": "straight",
-		"length": 300.0
+		"length": 30.0,
+		"dx": 0.0,
 	},
 	{
-		"type": "curve",
-		"length": 400.0,
-		"dx": -0.0,
-		"ddx": 0.01,
+		"length": 40.0,
+		"dx": -2.0,
 		"obstacle_spawn_rate": 0.5
 	},
 	{
-		"type": "straight",
-		"length": 200.0,
+		"length": 20.0,
+		"dx": 0.0
 	},
 	{
-		"type": "curve",
-		"length": 100.5,
-		"dx": 0.003,
-		"ddx": 0.0,
+		"length": 10.5,
+		"dx": 1,
 	},
 	{
-		"type": "straight",
-		"length": 100.0,
+		"length": 10.0,
+		"dx": 0,
 	}
 ]
