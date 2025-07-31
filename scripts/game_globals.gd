@@ -8,12 +8,17 @@ const LINE_WIDTH: int = 2
 const LINE_COLOR_SWICTH: int = 30
 const TRACK_PER_SCREEN: float = 10.0
 
+var track_speed: int = 120
+var scale_rate: int = 1.8
+var top_track_y: int = 240
 var player_node: Node2D = null
 var monster_node: Node2D = null
 var track_node: Node2D = null
 var screen_width: int = 0
 var screen_height: int = 0
 var horizon_y: float = 0
+
+@export var DEBUG: bool = 1
 
 func _ready() -> void:
 	is_screen_size_ready = false
@@ -35,17 +40,13 @@ func register_player(player: Node2D) -> void:
 	if player_node != null:
 		push_warning("A player node is already registered. Overwriting.")
 	player_node = player
+	player.z_index = 10	
 	print("Player registered")
 
 func get_player_track_coordinate() -> int:
 	if player_node == null:
 		push_error("Attempted to get player track_coord, but player doesn't exist.")
 	return player_node.track_coordinate
-
-func get_player_track_speed() -> int:
-	if player_node == null:
-		push_error("Attempted to get player track_coord, but player doesn't exist.")
-	return player_node.track_speed
 
 func register_track(track: Node2D) -> void:
 	if track_node != null:

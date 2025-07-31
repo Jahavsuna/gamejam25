@@ -1,9 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://dvxhj5hghp30r"]
+[gd_scene load_steps=23 format=3 uid="uid://dvxhj5hghp30r"]
 
 [ext_resource type="Script" uid="uid://cp4n4a46tu8ae" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://uwa2h6isly75" path="res://assets/textures/player_left.png" id="2_mdl7e"]
+[ext_resource type="Script" uid="uid://c71wkmbnv3ch5" path="res://scenes/character_body_2d.gd" id="3_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://dyrs0nf3tnqpi" path="res://assets/textures/player_right.png" id="3_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://b1xjfkh1xskos" path="res://assets/textures/player_straight.png" id="4_70d11"]
+[ext_resource type="Script" uid="uid://dcsn6h8jacwy8" path="res://scenes/player_anim_sprite.gd" id="6_70d11"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
+size = Vector2(82, 29.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cw2d6"]
 atlas = ExtResource("2_mdl7e")
@@ -113,20 +118,39 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q5h1"]
-size = Vector2(92, 104)
+size = Vector2(82, 26)
+
+[sub_resource type="GDScript" id="GDScript_70d11"]
+script/source = "extends CollisionShape2D
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area is loop_zone:
+		print(\"loop zone\")	
+"
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_p0vlq")
 
-[node name="PlayerAnimSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(6, -8.00001)
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("3_cw2d6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(4, -3.75)
+shape = SubResource("RectangleShape2D_70d11")
+
+[node name="PlayerAnimSprite" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(9, -54)
 scale = Vector2(3.53125, 4.25)
 sprite_frames = SubResource("SpriteFrames_ebwui")
 animation = &"left"
 speed_scale = 2.5
+script = ExtResource("6_70d11")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(4, 36)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(3, -3)
 shape = SubResource("RectangleShape2D_5q5h1")
+script = SubResource("GDScript_70d11")
+
+[connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D/Area2D/CollisionShape2D" method="_on_area_2d_area_entered"]

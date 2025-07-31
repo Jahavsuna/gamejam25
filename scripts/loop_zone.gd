@@ -15,12 +15,17 @@ class_name loop_zone
 
 func _ready() -> void:
 	_update_zone_collision()
-	body_entered.connect(_on_body_entered)
 
 func _update_zone_collision() -> void:
 	pass
+	
+func _process(delta: float) -> void:
+	var speed = GameGlobals.track_speed	
+	self.position.y += speed * delta
+	if self.position.y < GameGlobals.top_track_y: return
+	self.visible = true
 
-func _on_body_entered(body: PhysicsBody2D) -> void:
-	if body.name == 'Player':
-		# TODO: move the player coordinate, then get monster coordinate and update it accordingly.
-		print("loopzoneencounter")
+	self.scale += (Vector2(GameGlobals.scale_rate, GameGlobals.scale_rate)*delta/2)
+	if GameGlobals.player_node.position.y < self.position.y:
+		self.z_index = GameGlobals.player_node.z_index -1
+	

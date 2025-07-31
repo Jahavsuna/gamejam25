@@ -4,16 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://dejkyne5f6v0f" path="res://assets/textures/loop_zone.png" id="2_hckj6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hckj6"]
-size = Vector2(32, 54)
+size = Vector2(15, 28)
 
 [node name="LoopZone" type="Area2D"]
 script = ExtResource("1_ru5lk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(37, 33)
-shape = SubResource("RectangleShape2D_hckj6")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(36, 29.5)
-scale = Vector2(2.1875, 1.96875)
+position = Vector2(1, -9)
 texture = ExtResource("2_hckj6")
+
+[node name="LoopZoneCollidor" type="CollisionShape2D" parent="."]
+position = Vector2(1, -7)
+shape = SubResource("RectangleShape2D_hckj6")
