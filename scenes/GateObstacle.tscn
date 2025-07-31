@@ -1,17 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj08in37bjh5t"]
+[gd_scene load_steps=4 format=3 uid="uid://cj08in37bjh5t"]
 
+[ext_resource type="Script" uid="uid://ds75pgcm26m7j" path="res://scenes/gate_obstacle.gd" id="1_agosa"]
 [ext_resource type="Texture2D" uid="uid://24e2rpgmjrcd" path="res://assets/textures/obstacle_gate_1.png" id="1_o8svw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_agosa"]
 size = Vector2(25, 18)
 
 [node name="GateObstacle" type="Node2D"]
+script = ExtResource("1_agosa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
 texture = ExtResource("1_o8svw")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0.5, 3)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_agosa")

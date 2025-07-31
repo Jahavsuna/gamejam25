@@ -3,10 +3,10 @@
 		"type": "straight",
 		"length": 500.0,
 		"objects": [
-			["Gate", 50, 0],
-			["LoopZone", 100, 20],
-			["Gate", 150, -30],
-			["LoopZone", 200, 55],
+			["Gate", -150, 0],
+			["LoopZone", -200, 20],
+			["Gate", -250, -30],
+			["LoopZone", -400, 55],
 		]
 	},
 	{

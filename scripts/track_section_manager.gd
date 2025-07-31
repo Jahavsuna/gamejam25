@@ -17,6 +17,12 @@ var segment_1: Dictionary = {
 	'dy': 1,
 }
 
+var track_object: Dictionary = {
+	'name': "",
+	'x': -20,
+	'y': -20,
+}
+
 const LineScene: PackedScene = preload("res://scenes/Line.tscn")
 
 func _ready() -> void:
@@ -25,8 +31,8 @@ func _ready() -> void:
 		GameGlobals.update_screen_size()
 	screen_y_base = GameGlobals.screen_height
 	_load_track_data()
-	_load_nth_track_data(0)
 	_generate_track()
+	_load_nth_track_data(0)
 
 func _load_track_data() -> void:
 	var file = FileAccess.open(TRACK_DATA_FILE, FileAccess.READ)
@@ -39,6 +45,11 @@ func _load_track_data() -> void:
 		print("ERROR: Failed to load JSON from " + TRACK_DATA_FILE)
 	file.close()
 	
+func track_obj_sort(a, b):
+	return a.y < b.y
+	   
+
+
 func _load_nth_track_data(n) -> void:
 	var cur_track = track_data[n]
 	var objects_arr = cur_track["objects"]	
@@ -46,17 +57,21 @@ func _load_nth_track_data(n) -> void:
 	var type = cur_track["type"]	
 	var objects = [] 
 	for obj in objects_arr:
-		var new_obj
+		var new_obj = null		
 		if obj[0] == "LoopZone":
 			new_obj = loop_zone_scene.instantiate()
 		elif obj[0] == "Gate":
 			new_obj  = gate.instantiate()
 			
-		new_obj.visibility_layer = 100000;
-		new_obj.position = Vector2(obj[2] + GameGlobals.screen_width/2, obj[1])
+		if new_obj:
+			new_obj.visibility_layer = 100000;
+			new_obj.z_index = 1000
+			new_obj.position = Vector2(obj[2] + GameGlobals.screen_width/2, obj[1] + + GameGlobals.screen_height/2)
+		new_obj.visible=false
 		add_child(new_obj)
 		
-func _generate_track() -> void:
+		
+func _generate_track() -> void:	
 	print("Generating track from data")
 	var line_accumulator = 0
 	for iline in range(GameGlobals.LINES_PER_SCREEN):
@@ -71,7 +86,7 @@ func _generate_track() -> void:
 
 func _physics_process(_delta: float) -> void:
 	# Get player data to know how to advance
-	var translation_speed = GameGlobals.get_player_track_speed()
+	var translation_speed = GameGlobals.track_speed
 	var start_coordinate = GameGlobals.get_player_track_coordinate()
 	var end_coordinate = start_coordinate + GameGlobals.LINES_PER_SCREEN
 	
