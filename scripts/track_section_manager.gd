@@ -60,7 +60,7 @@ func _load_nth_track_data(n) -> void:
 		if new_obj:
 			new_obj.visibility_layer = 100000;
 			new_obj.z_index = 1000
-			new_obj.position = Vector2(obj[2] + GameGlobals.screen_width/2, obj[1] + + GameGlobals.screen_height/2)
+			new_obj.position = Vector2(obj[2] + GameGlobals.screen_width/2, obj[1] + GameGlobals.TRACK_PER_SCREEN)
 		new_obj.visible=false
 		add_child(new_obj)
 		
