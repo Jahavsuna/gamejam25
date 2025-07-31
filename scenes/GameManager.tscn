@@ -9,6 +9,6 @@
 [node name="Track" parent="." instance=ExtResource("1_4dhvd")]
 
 [node name="Player" parent="." instance=ExtResource("2_3dus2")]
-position = Vector2(279, 206)
+position = Vector2(300, 399)
 
 [node name="Monster" parent="." instance=ExtResource("3_rtub8")]

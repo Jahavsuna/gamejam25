@@ -28,4 +28,10 @@ func _process(delta):
 		player_sprite.play("left")
 	else:
 		player_sprite.play("straight")
+	
+	self.position += direction*30*delta;
+	#translate(direction * delta);
+	#self.transform.translated()
+	#(direction * delta);
+	
 		
