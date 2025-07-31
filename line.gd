@@ -19,23 +19,23 @@ const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 func _ready() -> void:
 	queue_redraw()
 
-func _config_colors(line_accumulator) -> void:
+func _config_colors() -> void:
 	edge_color = Color.WHITE_SMOKE
 	road_color = Color.BLACK
-	if line_accumulator / GameGlobals.LINE_COLOR_SWICTH % 2 == 0:
+	if int(self.position.y / GameGlobals.LINE_COLOR_SWICTH) % 2 == 0:
 		outer_color = Color.DARK_SLATE_GRAY
 	else:
 		outer_color = Color.SLATE_GRAY
 
-func _config_sizes(line_accumulator) -> void:
-	var length_change = tan(VISION_ANGLE_RAD) * line_accumulator
+func _config_sizes() -> void:
+	var length_change = tan(VISION_ANGLE_RAD) * (GameGlobals.screen_height - self.position.y)
 	outer_width += length_change
 	road_width -= 2 * length_change
 
-func configure_parameters(line_accumulator) -> void:
+func configure_parameters() -> void:
 	# TODO: add texture instead of manual lines
-	_config_colors(line_accumulator)
-	_config_sizes(line_accumulator)
+	_config_colors()
+	_config_sizes()
 
 func _draw() -> void:
 	var ttl_len = 2 * outer_width + 2 * edge_width + road_width

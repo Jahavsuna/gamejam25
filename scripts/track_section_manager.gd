@@ -2,8 +2,17 @@ extends Node2D
 
 const TRACK_DATA_FILE: String = "res://assets/tracks/first_level.json"
 var track_data: Array = []
-var track_lines: Array = []
+var track_lines: Array[Node2D] = []
 var screen_y_base: int = 0
+
+var segment_0: Dictionary = {
+	'y': 0,
+	'dy': 1,
+}
+var segment_1: Dictionary = {
+	'y': 0,
+	'dy': 1,
+}
 
 const LineScene: PackedScene = preload("res://scenes/Line.tscn")
 
@@ -33,16 +42,19 @@ func _generate_track() -> void:
 		var current_line = LineScene.instantiate()
 		current_line.position.x = 0
 		current_line.position.y = -line_accumulator + screen_y_base
-		current_line.configure_parameters(line_accumulator)
+		current_line.configure_parameters()
 		line_accumulator += current_line.line_width
 		track_lines.append(current_line)
 		add_child(current_line)
 		current_line.queue_redraw()
 
-func _process(_delta: float) -> void:
-	pass
-	#var start_coordinate = GameGlobals.get_player_track_coordinate()
-	#var end_coordinate = start_coordinate + GameGlobals.LINES_PER_SCREEN
+func _physics_process(_delta: float) -> void:
+	var translation_speed = GameGlobals.get_player_track_speed()
+	var start_coordinate = GameGlobals.get_player_track_coordinate()
+	var end_coordinate = start_coordinate + GameGlobals.LINES_PER_SCREEN
+	return
+	for line in track_lines:
+		line.translate(Vector2(0, translation_speed))
 	#var lines_to_plot = track_lines.slice(start_coordinate, end_coordinate)
 	# Called every frame
 	# draw the allowed number of lines
