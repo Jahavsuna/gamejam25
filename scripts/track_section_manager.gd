@@ -3,10 +3,12 @@ extends Node2D
 const TRACK_DATA_FILE: String = "res://assets/tracks/first_level.json"
 var track_data: Array = []
 var track_lines: Array = []
+var screen_y_base: int = 0
 
 const LineScene: PackedScene = preload("res://scenes/Line.tscn")
 
 func _ready() -> void:
+	screen_y_base = -1 * get_viewport_rect().size.y
 	_load_track_data()
 	_generate_track_from_data()
 
@@ -33,16 +35,14 @@ func _configure_line_colors(line: Node2D, line_idx: int) -> Node2D:
 
 func _generate_track_from_data() -> void:
 	print("Generating track from data")
-	var y_base = -480
 	for current_section in track_data:
 		for iline in range(int(current_section.length)):
-			print(str(iline))
 			var current_line = LineScene.instantiate()
 			current_line = _configure_line_colors(current_line, iline)
 			current_line.position.x = 0
-			current_line.position.y = current_line.line_width * iline + y_base
+			current_line.position.y = current_line.line_width * iline + screen_y_base
 			track_lines.append(current_line)
-			add_child(current_line)
+			#add_child(current_line) # TODO: this should be moved to where we actually want to plot.
 
 
 func _process(delta: float) -> void:
