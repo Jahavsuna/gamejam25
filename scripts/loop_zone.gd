@@ -15,12 +15,6 @@ class_name loop_zone
 
 func _ready() -> void:
 	_update_zone_collision()
-	body_entered.connect(_on_body_entered)
 
 func _update_zone_collision() -> void:
 	pass
-
-func _on_body_entered(body: PhysicsBody2D) -> void:
-	if body.name == 'Player':
-		# TODO: move the player coordinate, then get monster coordinate and update it accordingly.
-		print("loopzoneencounter")

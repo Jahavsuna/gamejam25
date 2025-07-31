@@ -12,6 +12,8 @@ var screen_width: int = 0
 var screen_height: int = 0
 var horizon_y: float = 0 # Half screen
 
+@export var DEBUG: bool = 1
+
 func _ready() -> void:
 	print("GameGlobals is ready")
 

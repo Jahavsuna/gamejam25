@@ -9,7 +9,7 @@ size = Vector2(15, 28)
 [node name="LoopZone" type="Area2D"]
 script = ExtResource("1_ru5lk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="LoopZoneCollidor" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_hckj6")
 

@@ -1,7 +1,9 @@
 extends Node2D
 
+var player_v:float = 50
 var track_coordinate: int = 0
 var track_speed: int = 0
+var direction:Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	GameGlobals.register_player(self)
@@ -12,26 +14,23 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta):
-	var direction = Vector2.ZERO
+	direction = Vector2.ZERO
 	# Detect continuous movement input using UI actions (configured in Project Settings -> Input Map)
 	if Input.is_action_pressed("ui_left"):
-		direction.x -= 1
-
+		self.direction.x -= 1
 	if Input.is_action_pressed("ui_right"):
-		direction.x += 1
+		self.direction.x += 1
+	
+	if GameGlobals.DEBUG:
+		if Input.is_action_pressed("ui_up"):
+			self.direction.y -= 1
+		if Input.is_action_pressed("ui_down"):
+			self.direction.y += 1
+			
 
-	var player_sprite = $PlayerAnimSprite as AnimatedSprite2D
-	
-	if direction.x > 0:
-		player_sprite.play("right")
-	elif direction.x < 0:
-		player_sprite.play("left")
-	else:
-		player_sprite.play("straight")
-	
-	self.position += direction*30*delta;
-	#translate(direction * delta);
-	#self.transform.translated()
-	#(direction * delta);
-	
+func _on_area_entered(body):
+		print("some enter!")
+		if body.name == "Player":
+			print("Player entered the area!")
+			# Add code here to handle the player entering the area
 		
