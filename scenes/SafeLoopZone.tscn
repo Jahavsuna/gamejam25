@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hckj6"]
 size = Vector2(37, 12.5)
 
-[node name="LoopZone" type="Area2D"]
+[node name="LoopZone2" type="Area2D"]
 script = ExtResource("1_6u58d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d4jf304hkshyr"]
 
-[ext_resource type="Script" path="res://scenes/gate_obstacle.gd" id="1_agosa"]
+[ext_resource type="Script" uid="uid://ds75pgcm26m7j" path="res://scenes/gate_obstacle.gd" id="1_agosa"]
 [ext_resource type="Texture2D" uid="uid://24e2rpgmjrcd" path="res://assets/textures/obstacle_gate_1.png" id="1_o8svw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_agosa"]

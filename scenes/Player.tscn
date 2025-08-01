@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cp4n4a46tu8ae" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://uwa2h6isly75" path="res://assets/textures/player_left.png" id="2_mdl7e"]
-[ext_resource type="Script" path="res://scenes/character_body_2d.gd" id="3_cw2d6"]
+[ext_resource type="Script" uid="uid://c71wkmbnv3ch5" path="res://scenes/character_body_2d.gd" id="3_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://dyrs0nf3tnqpi" path="res://assets/textures/player_right.png" id="3_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://b1xjfkh1xskos" path="res://assets/textures/player_straight.png" id="4_70d11"]
-[ext_resource type="Script" path="res://scenes/player_anim_sprite.gd" id="6_70d11"]
+[ext_resource type="Script" uid="uid://dcsn6h8jacwy8" path="res://scenes/player_anim_sprite.gd" id="6_70d11"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
-size = Vector2(74.5, 21.9375)
+size = Vector2(64.0625, 21.9375)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cw2d6"]
 atlas = ExtResource("2_mdl7e")
@@ -118,7 +118,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q5h1"]
-size = Vector2(73.6875, 22.25)
+size = Vector2(64.0625, 22.25)
 
 [sub_resource type="GDScript" id="GDScript_70d11"]
 script/source = "extends CollisionShape2D
@@ -146,11 +146,11 @@ script = ExtResource("1_p0vlq")
 script = ExtResource("3_cw2d6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0.25, 0.03125)
+position = Vector2(0.78125, 0.03125)
 shape = SubResource("RectangleShape2D_70d11")
 
 [node name="PlayerAnimSprite" type="AnimatedSprite2D" parent="CharacterBody2D"]
-position = Vector2(9, -54)
+position = Vector2(9, -52.4375)
 scale = Vector2(3.53125, 4.25)
 sprite_frames = SubResource("SpriteFrames_ebwui")
 animation = &"left"
@@ -160,6 +160,7 @@ script = ExtResource("6_70d11")
 [node name="Area2D" type="Area2D" parent="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(0.78125, 0)
 shape = SubResource("RectangleShape2D_5q5h1")
 script = SubResource("GDScript_70d11")
 
