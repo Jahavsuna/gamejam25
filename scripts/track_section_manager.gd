@@ -1,5 +1,7 @@
 extends Node2D
 
+enum Fields {type, x, track, safe, target}
+
 @onready var loop_line = preload("res://scenes/LoopLine.tscn")
 @onready var gate = preload("res://scenes/GateObstacle.tscn")
 
@@ -12,6 +14,8 @@ var lowest_line_idx: int = 0
 
 var finish_line_in_view = false
 var finish_line_scene = preload("res://scenes/FinishLine.tscn")
+
+var objects_in_segment: Array = []
 
 const LineScene: PackedScene = preload("res://scenes/Line.tscn")
 
@@ -37,33 +41,45 @@ func _load_track_data() -> void:
 	else:
 		print("ERROR: Failed to load JSON from " + TRACK_DATA_FILE)
 	file.close()
-	
+
 func track_obj_sort(a, b):
 	return a.y < b.y
 
 func _load_nth_track_data(n) -> void:
 	var cur_track = track_data[n]
-	if not "objects" in cur_track: return
-	
-	var objects_arr = cur_track["objects"]
-	for obj in objects_arr:
-		var new_obj = null		
-		if obj[0] == "LoopZone":
-			new_obj = loop_line.instantiate()
-			print(obj)
-			new_obj.loop_to_segment = int(obj[4])
-			new_obj.safe_zone = int(obj[3])
-		elif obj[0] == "Gate":
-			new_obj  = gate.instantiate()
-			
-		if new_obj:
-			new_obj.visibility_layer = 100000;
-			new_obj.z_index = 1000
-			new_obj.position = Vector2(obj[2] + GameGlobals.screen_width/2.0, obj[1] + GameGlobals.TRACK_PER_SCREEN)
-		new_obj.visible=false
-		add_child(new_obj)
+	objects_in_segment = []
+	if not "objects" in cur_track:
+		return
+	for obj in cur_track["objects"]:
+		var new_obj = obj
+		var drawn = 0
+		objects_in_segment.append([new_obj, drawn])
+
+func _get_next_track_object() -> int:
+	for i_obj_desc in objects_in_segment.size():
+		var obj_desc = objects_in_segment[i_obj_desc]
+		if obj_desc[1] == 0:
+			return i_obj_desc
+	return -1
+
+func _create_object(obj: Array) -> void:
+	var new_obj = null
+	if obj[Fields.type] == "LoopZone":
+		new_obj = loop_line.instantiate()
+		print(obj)
+		new_obj.loop_to_segment = int(obj[Fields.target])
+		new_obj.safe_zone = int(obj[Fields.safe])
 		
+	elif obj[Fields.type] == "Gate":
+		new_obj = gate.instantiate()
 		
+	if new_obj:
+		new_obj.visibility_layer = 100000;
+		new_obj.z_index = 1000
+		new_obj.position = Vector2(obj[Fields.x] + GameGlobals.screen_width/2.0, GameGlobals.horizon_y)
+	#new_obj.visible=false
+	add_child(new_obj)
+
 func _generate_track() -> void:	
 	print("Generating track from data")
 	var line_accumulator = 0
@@ -140,6 +156,15 @@ func _physics_process(delta: float) -> void:
 		# Offset the line
 		line.x_offset = line_ddx
 		line.update_size()
+	
+	# Check if next object need to be instantiated
+	var next_obj_idx = _get_next_track_object()
+	if next_obj_idx != -1:
+		var next_obj = objects_in_segment[next_obj_idx][0]
+		if next_obj[Fields.track] <= start_coordinate + GameGlobals.LINES_PER_SCREEN:
+			# Need to instantiate the object
+			_create_object(next_obj)
+			objects_in_segment[next_obj_idx][1] = 1
 	
 	# If we are in the last segment, need to add finish line and ghost segment
 	var distance_from_finish_line = segment_ends[-1] - start_coordinate
