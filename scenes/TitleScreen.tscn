@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuj81glh2aomx"]
+[gd_scene load_steps=4 format=3 uid="uid://cuj81glh2aomx"]
 
 [ext_resource type="Script" uid="uid://dr2lhlwku6hsc" path="res://scenes/title_screen.gd" id="1_qyuap"]
 [ext_resource type="Texture2D" uid="uid://bcnxf2wyufgkv" path="res://assets/textures/sky.jpg" id="2_ch40n"]
+[ext_resource type="FontFile" uid="uid://6hifseux5xs0" path="res://assets/font_VT323/VT323-Regular.ttf" id="2_dfj8j"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -13,34 +14,46 @@ grow_vertical = 2
 script = ExtResource("1_qyuap")
 
 [node name="Name" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 64.0
-offset_right = 512.0
-offset_bottom = 192.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.133
+anchor_right = 0.8
+anchor_bottom = 0.4
+offset_left = -128.0
+offset_top = -63.84
+offset_right = 128.0
+offset_bottom = 208.0
+theme_override_fonts/normal_font = ExtResource("2_dfj8j")
+theme_override_font_sizes/normal_font_size = 70
 text = "Escape from that door monster that loops you*
-
-
 
 *working title"
 horizontal_alignment = 1
 
 [node name="ControlHint" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 128.0
-offset_top = 216.0
-offset_right = 512.0
-offset_bottom = 344.0
-text = "Use the arrow keys to move. Escape the monster!"
+offset_left = 88.0
+offset_top = 312.0
+offset_right = 552.0
+offset_bottom = 392.0
+theme_override_fonts/normal_font = ExtResource("2_dfj8j")
+theme_override_font_sizes/normal_font_size = 30
+text = "Use the arrow keys to move. Run from the monster!"
 horizontal_alignment = 1
 
 [node name="StartHint" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 128.0
+offset_left = 64.0
 offset_top = 392.0
-offset_right = 512.0
-offset_bottom = 416.0
-text = "PRESS ANY KEY TO START"
+offset_right = 576.0
+offset_bottom = 440.0
+theme_override_fonts/normal_font = ExtResource("2_dfj8j")
+theme_override_fonts/bold_font = ExtResource("2_dfj8j")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[b]PRESS ANY KEY TO START[/b]"
 horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
