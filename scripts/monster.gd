@@ -6,7 +6,8 @@ var track_speed: float = 0
 var track_coordinate: float = 0
 
 func _ready() -> void:
-	track_speed = 50
+	# This means the monster ALMOST gets you if you play perfectly. Need to adjust based on track
+	track_speed = GameGlobals.track_speed * 1.01
 	track_coordinate = -INITIAL_GAP
 	GameGlobals.register_monster(self)
 
