@@ -10,7 +10,8 @@ var segment_ends: Array = []
 var active_segment = 0
 var lowest_line_idx: int = 0
 
-
+var finish_line_in_view = false
+var finish_line_scene = preload("res://scenes/FinishLine.tscn")
 
 const LineScene: PackedScene = preload("res://scenes/Line.tscn")
 
@@ -39,7 +40,6 @@ func _load_track_data() -> void:
 	
 func track_obj_sort(a, b):
 	return a.y < b.y
-	   
 
 func _load_nth_track_data(n) -> void:
 	var cur_track = track_data[n]
@@ -88,6 +88,11 @@ func _get_line_track_offset(line: Node2D) -> float:
 func set_active_segment(seg_i:int):
 	active_segment = seg_i
 
+func draw_finish_line():
+	var finish_line = finish_line_scene.instantiate()
+	finish_line.position = Vector2(GameGlobals.screen_width / 2, GameGlobals.horizon_y)
+	add_child(finish_line)
+
 func _physics_process(delta: float) -> void:
 	# Avoid running this befor the function is ready
 	if not GameGlobals.is_screen_size_ready: return
@@ -123,7 +128,12 @@ func _physics_process(delta: float) -> void:
 		# Calculate the linex offset based on segment
 		var line_track_coord = start_coordinate + _get_line_track_offset(line)
 		if line_track_coord >= segment_ends[active_segment]:
-			line_dx = track_data[active_segment + 1]["dx"]
+			# Only advance the index if the active segment is not the last one
+			if active_segment < track_data.size() - 1:
+				line_dx = track_data[active_segment + 1]["dx"]
+			else:
+				line_dx = 0
+				line_ddx = 0
 		else:
 			line_dx = track_data[active_segment]["dx"]
 		line_ddx += line_dx
@@ -131,3 +141,12 @@ func _physics_process(delta: float) -> void:
 		# Offset the line
 		line.x_offset = line_ddx
 		line.update_size()
+	
+	# If we are in the last segment, need to add finish line and ghost segment
+	var distance_from_finish_line = segment_ends[-1] - start_coordinate
+	if distance_from_finish_line <= GameGlobals.TRACK_PER_SCREEN:
+		if finish_line_in_view:
+			pass
+		else:
+			finish_line_in_view = true
+			draw_finish_line()

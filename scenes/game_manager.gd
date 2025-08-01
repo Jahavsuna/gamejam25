@@ -35,10 +35,9 @@ func _process(delta: float) -> void:
 		_apply_defeat()
 	
 	# Check whether the player reached the track end
-	#if player_coordinate >= track_end: Return this later
-	if player_coordinate >= track_end-1000:
+	if player_coordinate >= track_end:
 		state = GameState.VICTORY
 		print("Player reached end! state=" + str(state))
 		_apply_victory()
 	
-	print("Monster distance: "+str(player_coordinate - monster_coordinate))
+	#print("Monster distance: "+str(player_coordinate - monster_coordinate))
