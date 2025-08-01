@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcrd4q01dmck6"]
+
+[ext_resource type="Script" uid="uid://2najfop0laps" path="res://scripts/monster.gd" id="1_xquod"]
+[ext_resource type="AudioStream" uid="uid://cpfgpxs2hn6t2" path="res://assets/sounds/knife_1.wav" id="2_ulq6r"]
+[ext_resource type="Script" uid="uid://da06esqtpl002" path="res://scenes/monster_audio_stream_player.gd" id="2_ybq8a"]
+[ext_resource type="Script" uid="uid://br4ohib7t5ect" path="res://scenes/monster_audio_stream_player_2.gd" id="4_udqn3"]
+
+[node name="Monster" type="Node2D"]
+script = ExtResource("1_xquod")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ulq6r")
+volume_db = 1.514
+script = ExtResource("2_ybq8a")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+script = ExtResource("4_udqn3")

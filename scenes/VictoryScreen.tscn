@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://clpciu4qu82sq"]
+
+[ext_resource type="FontFile" uid="uid://6hifseux5xs0" path="res://assets/font_VT323/VT323-Regular.ttf" id="1_33nc3"]
+[ext_resource type="Script" uid="uid://bnto2jj242ye8" path="res://scenes/victory_screen.gd" id="1_86fr6"]
+[ext_resource type="Texture2D" uid="uid://bh1aosifhb4n8" path="res://assets/textures/marsbase.jpg" id="2_70mwv"]
+
+[node name="VictoryScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_86fr6")
+
+[node name="VictoryText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 288.0
+theme_override_fonts/normal_font = ExtResource("1_33nc3")
+theme_override_fonts/bold_font = ExtResource("1_33nc3")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "You got away safely and back to your moonbase!
+
+Thanks for playing!
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayAgainText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 288.0
+theme_override_fonts/normal_font = ExtResource("1_33nc3")
+theme_override_fonts/bold_font = ExtResource("1_33nc3")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "
+
+
+
+
+[b]PRESS ANY KEY TO PLAY AGAIN[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameCredit" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 369.0
+offset_right = 680.0
+offset_bottom = 473.0
+theme_override_fonts/normal_font = ExtResource("1_33nc3")
+theme_override_font_sizes/normal_font_size = 20
+text = "Game by:
+Josh Clark
+Yahav Lavie"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(320, 160)
+scale = Vector2(0.137993, 0.137993)
+texture = ExtResource("2_70mwv")
+
+[node name="ImageCredit" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 464.0
+offset_right = 464.0
+offset_bottom = 480.0
+theme_override_fonts/normal_font = ExtResource("1_33nc3")
+theme_override_font_sizes/normal_font_size = 16
+text = "Background by Brgfx: https://www.freepik.com/author/brgfx"

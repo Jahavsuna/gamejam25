@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://gplegsrlm5ps"]
+
+[ext_resource type="PackedScene" uid="uid://clqbjkacmhvqe" path="res://scenes/GameManager.tscn" id="1_rus8k"]
+[ext_resource type="Texture2D" uid="uid://drnd05c60mvcr" path="res://assets/textures/sky_small.png" id="3_rus8k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bswci"]
+size = Vector2(639.5, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rus8k"]
+size = Vector2(16, 267)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xbjy"]
+size = Vector2(16, 268)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nkto"]
+size = Vector2(674, 16)
+
+[node name="Level1" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(319, 158.1)
+scale = Vector2(1, 0.7895)
+texture = ExtResource("3_rus8k")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 240)
+
+[node name="GameManager" parent="." instance=ExtResource("1_rus8k")]
+
+[node name="WorldBounds" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="WorldBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/TopWall"]
+position = Vector2(320, 220)
+shape = SubResource("RectangleShape2D_bswci")
+
+[node name="LeftWall" type="StaticBody2D" parent="WorldBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/LeftWall"]
+position = Vector2(-8, 346.5)
+shape = SubResource("RectangleShape2D_rus8k")
+
+[node name="RightWall" type="StaticBody2D" parent="WorldBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/RightWall"]
+position = Vector2(648, 346)
+shape = SubResource("RectangleShape2D_5xbjy")
+
+[node name="BottomWall" type="StaticBody2D" parent="WorldBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/BottomWall"]
+position = Vector2(319, 488)
+shape = SubResource("RectangleShape2D_4nkto")

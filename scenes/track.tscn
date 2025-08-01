@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr0hgvkywp0s6"]
+
+[ext_resource type="Script" uid="uid://djgd4blwmewve" path="res://scripts/track_section_manager.gd" id="1_s1rm4"]
+
+[node name="Track" type="Node2D"]
+
+[node name="TrackSectionManager" type="Node2D" parent="."]
+script = ExtResource("1_s1rm4")

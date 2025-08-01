@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://clqbjkacmhvqe"]
+
+[ext_resource type="PackedScene" uid="uid://cr0hgvkywp0s6" path="res://scenes/track.tscn" id="1_4dhvd"]
+[ext_resource type="PackedScene" uid="uid://dvxhj5hghp30r" path="res://scenes/Player.tscn" id="2_3dus2"]
+[ext_resource type="PackedScene" uid="uid://bcrd4q01dmck6" path="res://scenes/Monster.tscn" id="3_rtub8"]
+
+[node name="GameManager" type="Node2D"]
+
+[node name="Track" parent="." instance=ExtResource("1_4dhvd")]
+
+[node name="Player" parent="." instance=ExtResource("2_3dus2")]
+
+[node name="Monster" parent="." instance=ExtResource("3_rtub8")]
