@@ -13,7 +13,7 @@ func _ready() -> void:
 func _volume_db_from_coordinate_delta(coordinate_delta: float)-> float:
 	return 10-coordinate_delta
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if self.playing: return
 	else: sound_i += 1
 	if sound_i >= len(sounds_array):
