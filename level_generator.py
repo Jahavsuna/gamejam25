@@ -1,6 +1,6 @@
 import json
 
-def create_segment():
+def create_segment(segments_so_far):
     """
     Interactively creates a single segment dictionary based on user input.
     """
@@ -24,6 +24,7 @@ def create_segment():
 
     if input("Do you want to add objects to this segment? (yes/no): ").lower() == 'yes':
         objects = []
+        loopzone_y_coords = []
         while True:
             object_type = input("Enter object type ('Gate' or 'LoopZone', or 'done' to finish): ").lower()
             if object_type == 'done':
@@ -42,14 +43,42 @@ def create_segment():
                     try:
                         x = float(input("Enter LoopZone x coordinate: "))
                         y = float(input("Enter LoopZone y coordinate: "))
+
+                        # Validate LoopZone proximity
+                        is_too_close = False
+                        for ly in loopzone_y_coords:
+                            if abs(y - ly) < 50:
+                                print(f"Error: A LoopZone already exists within 50 units on the y-axis at y={ly}. Please choose a different y coordinate.")
+                                is_too_close = True
+                                break
+                        if is_too_close:
+                            continue
+
                         safe_zone_index = int(input("Enter LoopZone safe zone index (0, 1, or 2): "))
-                        target_segment = int(input("Enter LoopZone target segment index (must be smaller than current segment): "))
+                        
+                        while True:
+                            try:
+                                target_segment = int(input("Enter LoopZone target segment index: "))
+                                if target_segment >= len(segments_so_far):
+                                    print(f"Error: Target segment index {target_segment} is not smaller than the current segment index {len(segments_so_far)}. Please enter a smaller index.")
+                                    continue
+                                if segments_so_far[target_segment]["dx"] != dx:
+                                    print(f"Error: Target segment {target_segment} has a different dx ({segments_so_far[target_segment]['dx']}) than the current segment ({dx}). Please choose a target with the same dx.")
+                                    continue
+                                break
+                            except (ValueError, IndexError):
+                                print("Invalid input or target segment index. Please enter a valid integer that is smaller than the current segment index.")
+
                         objects.append(["LoopZone", x, y, safe_zone_index, target_segment])
+                        loopzone_y_coords.append(y)
                         break
                     except ValueError:
                         print("Invalid input. Please enter numbers for coordinates and integers for indices.")
             else:
                 print("Invalid object type. Please enter 'Gate' or 'LoopZone'.")
+        
+        # Sort objects by their y-coordinate
+        objects.sort(key=lambda item: item[2])
         if objects:
             segment["objects"] = objects
 
@@ -63,7 +92,7 @@ def generate_segments():
     print("Starting interactive segment generation.")
 
     while True:
-        segments.append(create_segment())
+        segments.append(create_segment(segments))
         if input("Add another segment? (yes/no): ").lower() != 'yes':
             break
 
