@@ -12,7 +12,7 @@ func _apply_defeat() -> void:
 	get_tree().change_scene_to_file("res://scenes/DefeatScreen.tscn")
 
 func _apply_victory() -> void:
-	pass
+	get_tree().change_scene_to_file("res://scenes/VictoryScreen.tscn")
 
 func _apply_title() -> void:
 	pass
@@ -28,8 +28,10 @@ func _process(delta: float) -> void:
 		_apply_defeat()
 	
 	# Check whether the player reached the track end
-	if player_coordinate >= track_end:
+	#if player_coordinate >= track_end: Return this later
+	if player_coordinate >= track_end-1000:
 		state = GameState.VICTORY
 		print("Player reached end! state=" + str(state))
+		_apply_victory()
 	
 	print("Monster distance: "+str(player_coordinate - monster_coordinate))
