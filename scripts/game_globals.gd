@@ -10,9 +10,9 @@ const TRACK_PER_SCREEN: float = 10.0
 
 var track_speed: float = 100
 var scale_rate: float = 1.6
-var player_node: Node2D = null
-var monster_node: Node2D = null
-var track_node: Node2D = null
+var player_node: PlayerNode = null
+var monster_node: MonsterNode = null
+var track_node: TrackMgr = null
 var screen_width: float = 0
 var screen_height: float = 0
 var horizon_y: float = 0

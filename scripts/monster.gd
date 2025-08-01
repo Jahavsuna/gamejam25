@@ -1,4 +1,5 @@
 extends Node2D
+class_name MonsterNode
 
 const INITIAL_GAP = 500
 

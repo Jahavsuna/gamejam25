@@ -1,4 +1,5 @@
 extends Node2D
+class_name PlayerNode
 
 var player_v:float = 60
 var track_coordinate: float = 0
