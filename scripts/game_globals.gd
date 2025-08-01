@@ -36,16 +36,23 @@ func register_monster(monster: Node2D) -> void:
 	monster_node = monster
 	print("Player registered")
 
+func get_monster_track_coordinate() -> float:
+	if monster_node == null:
+		push_error("Attempted to read monster data, but no monster was registered.")
+		return -1
+	return monster_node.track_coordinate
+
 func register_player(player: Node2D) -> void:
 	if player_node != null:
 		push_warning("A player node is already registered. Overwriting.")
 	player_node = player
-	player.z_index = 10	
+	player.z_index = 10
 	print("Player registered")
 
-func get_player_track_coordinate() -> int:
+func get_player_track_coordinate() -> float:
 	if player_node == null:
 		push_error("Attempted to get player track_coord, but player doesn't exist.")
+		return -1
 	return player_node.track_coordinate
 
 func register_track(track: Node2D) -> void:
@@ -53,4 +60,9 @@ func register_track(track: Node2D) -> void:
 		push_warning("A track node is already registered. Overwriting.")
 	track_node = track
 	print("Player registered")
-	
+
+func get_track_end_coordinate() -> float:
+	if track_node == null:
+		push_error("Attempted to get track end coordinate, but track doesn't exist.")
+		return -1
+	return track_node.segment_ends[-1]

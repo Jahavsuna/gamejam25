@@ -2,8 +2,8 @@ extends Node2D
 
 const INITIAL_GAP = 500
 
-var track_speed: int = 0
-var track_coordinate: int = 0
+var track_speed: float = 0
+var track_coordinate: float = 0
 
 func _ready() -> void:
 	track_speed = 50

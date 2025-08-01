@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://dha27bccu4ey8"]
+
+[ext_resource type="Script" uid="uid://wds7wm7jm0bg" path="res://scenes/defeat_screen.gd" id="1_tp7al"]
+[ext_resource type="Texture2D" uid="uid://bcnxf2wyufgkv" path="res://assets/textures/sky.jpg" id="1_yvgvb"]
+[ext_resource type="FontFile" uid="uid://6hifseux5xs0" path="res://assets/font_VT323/VT323-Regular.ttf" id="2_tp7al"]
+
+[node name="DefeatScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tp7al")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yvgvb")
+
+[node name="DefeatText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 480.0
+theme_override_fonts/normal_font = ExtResource("2_tp7al")
+theme_override_fonts/bold_font = ExtResource("2_tp7al")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[b][color=red]The monster got you...[/color][/b]
+
+For some reason it feels as though the streets keep repeating... Could I be doing something wrong?
+
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 64.0
+offset_top = 360.0
+offset_right = 576.0
+offset_bottom = 440.0
+theme_override_fonts/bold_font = ExtResource("2_tp7al")
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[b]PRESS ANY KEY TO TRY AGAIN[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
