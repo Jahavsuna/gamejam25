@@ -5,7 +5,7 @@ var can_receive_input: bool = false
 
 func _ready():
 	can_receive_input = false
-	print("Defeat screen ready, waiting for lock time")
+	print("Victory screen ready, waiting for lock time")
 	await get_tree().create_timer(KEY_LOCK_TIME_SEC).timeout
 	$PlayAgainText.visible = true
 	can_receive_input = true
