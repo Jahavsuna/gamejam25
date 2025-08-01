@@ -138,9 +138,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(\"loop zone to segment #\", dest_segment)
 	var player = get_parent().get_parent().get_parent() 
 	
-	player.track_coordinate = dest_segment
-	GameGlobals.track_node._load_nth_track_data(dest_segment)
-	GameGlobals.track_node.set_active_segment(dest_segment)
+	GameGlobals.perform_loop(dest_segment)
 "
 
 [node name="Player" type="Node2D"]

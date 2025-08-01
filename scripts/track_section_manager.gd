@@ -10,6 +10,7 @@ const TRACK_DATA_FILE: String = "res://assets/tracks/first_level.json"
 var track_lines: Array[Node2D] = []
 var track_data: Array = []
 var segment_ends: Array = []
+var segment_starts: Array = []
 var active_segment = 0
 var lowest_line_idx: int = 0
 
@@ -37,6 +38,7 @@ func _load_track_data() -> void:
 		print("Loaded JSON, detected array")
 		for p in parse_result:
 			track_data.append(p)
+			segment_starts.append(distance_accumulator)
 			distance_accumulator += p["length"]
 			segment_ends.append(distance_accumulator)
 	else:
