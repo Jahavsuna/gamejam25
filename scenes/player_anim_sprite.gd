@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var player = get_parent().get_parent()
 
 	if player.direction.x > 0:

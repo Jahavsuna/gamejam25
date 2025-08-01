@@ -1,7 +1,7 @@
 extends AudioStreamPlayer
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var player = get_parent()
 	if player.direction.y < 0:
 		if  !self.playing:

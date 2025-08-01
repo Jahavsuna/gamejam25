@@ -17,7 +17,7 @@ func _apply_victory() -> void:
 func _apply_title() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Check whether the monster caught the player
 	var monster_coordinate = GameGlobals.get_monster_track_coordinate()
 	var player_coordinate = GameGlobals.get_player_track_coordinate()

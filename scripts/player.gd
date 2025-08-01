@@ -1,7 +1,7 @@
 extends Node2D
 
 var player_v:float = 60
-var track_coordinate: int = 0
+var track_coordinate: float = 0
 var direction:Vector2 = Vector2.ZERO
 
 func _ready() -> void:
@@ -11,7 +11,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	track_coordinate += GameGlobals.track_speed * delta
 
-func _process(delta):
+func _process(_delta: float):
 	direction = Vector2.ZERO
 	# Detect continuous movement input using UI actions (configured in Project Settings -> Input Map)
 	if Input.is_action_pressed("ui_left"):

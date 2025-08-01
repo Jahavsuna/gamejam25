@@ -4,13 +4,13 @@ const MIN_X = -100
 const MAX_X = 740 # 640 + 100
 const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 
-@export var base_outer_width: int = 90
-@export var base_edge_width: int = 20
-@export var base_road_width: int = 420
+@export var base_outer_width: float = 90
+@export var base_edge_width: float = 20
+@export var base_road_width: float = 420
 
-@export var outer_width: int = 90
-@export var edge_width: int = 20
-@export var road_width: int = 420
+@export var outer_width: float = 90
+@export var edge_width: float = 20
+@export var road_width: float = 420
 
 @export var outer_color: Color
 @export var edge_color: Color
@@ -18,7 +18,7 @@ const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 
 @export var x_offset: float = 0.0
 @export var y_offset: float = 0.0
-@export var line_width: int = GameGlobals.LINE_WIDTH
+@export var line_width: float = GameGlobals.LINE_WIDTH
 
 func _ready() -> void:
 	queue_redraw()
