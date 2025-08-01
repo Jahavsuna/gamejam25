@@ -144,9 +144,7 @@ func _physics_process(delta: float) -> void:
 	
 	# If we are in the last segment, need to add finish line and ghost segment
 	var distance_from_finish_line = segment_ends[-1] - start_coordinate
-	if distance_from_finish_line <= GameGlobals.TRACK_PER_SCREEN:
-		if finish_line_in_view:
-			pass
-		else:
+	if distance_from_finish_line <= GameGlobals.TRACK_PER_SCREEN * 5:
+		if not finish_line_in_view:
 			finish_line_in_view = true
 			draw_finish_line()
