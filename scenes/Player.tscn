@@ -175,7 +175,7 @@ script = SubResource("GDScript_70d11")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_cw2d6")
-volume_db = -10.95
+volume_db = -16.565
 script = ExtResource("8_khinc")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
