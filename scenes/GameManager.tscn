@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://clqbjkacmhvqe"]
+[gd_scene load_steps=5 format=3 uid="uid://clqbjkacmhvqe"]
 
 [ext_resource type="PackedScene" uid="uid://cr0hgvkywp0s6" path="res://scenes/track.tscn" id="1_4dhvd"]
 [ext_resource type="PackedScene" uid="uid://dvxhj5hghp30r" path="res://scenes/Player.tscn" id="2_3dus2"]
 [ext_resource type="PackedScene" uid="uid://bcrd4q01dmck6" path="res://scenes/Monster.tscn" id="3_rtub8"]
+[ext_resource type="AudioStream" uid="uid://ci62p8ucf5ec5" path="res://assets/bg_music.mp3" id="4_3dus2"]
 
 [node name="GameManager" type="Node2D"]
 
@@ -12,3 +13,7 @@
 position = Vector2(312, 302)
 
 [node name="Monster" parent="." instance=ExtResource("3_rtub8")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3dus2")
+autoplay = true
