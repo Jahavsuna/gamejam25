@@ -17,6 +17,7 @@ func _apply_victory() -> void:
 func _apply_title() -> void:
 	pass
 
+
 func _process(_delta: float) -> void:
 	# Check whether the monster caught the player
 	var monster_coordinate = GameGlobals.get_monster_track_coordinate()
@@ -26,6 +27,7 @@ func _process(_delta: float) -> void:
 		state = GameState.DEFEAT
 		print("Player caught! state=" + str(state))
 		_apply_defeat()
+		
 	
 	# The player also loses if they are dragged off-screen
 	var player_position = GameGlobals.get_player_screen_position()
