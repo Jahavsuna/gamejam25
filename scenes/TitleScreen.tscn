@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuj81glh2aomx"]
+
+[ext_resource type="Script" uid="uid://dr2lhlwku6hsc" path="res://scenes/title_screen.gd" id="1_qyuap"]
+[ext_resource type="Texture2D" uid="uid://bcnxf2wyufgkv" path="res://assets/textures/sky.jpg" id="2_ch40n"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qyuap")
+
+[node name="Name" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 192.0
+text = "Escape from that door monster that loops you*
+
+
+
+*working title"
+horizontal_alignment = 1
+
+[node name="ControlHint" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 216.0
+offset_right = 512.0
+offset_bottom = 344.0
+text = "Use the arrow keys to move. Escape the monster!"
+horizontal_alignment = 1
+
+[node name="StartHint" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 392.0
+offset_right = 512.0
+offset_bottom = 416.0
+text = "PRESS ANY KEY TO START"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_ch40n")
