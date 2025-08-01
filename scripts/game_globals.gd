@@ -78,5 +78,5 @@ func perform_loop(target_segment: int) -> void:
 	var new_monster_coord = new_player_coord - monster_player_dist
 	monster_node.track_coordinate = new_monster_coord
 	player_node.track_coordinate = new_player_coord
-	track_node.active_segment = target_segment
+	track_node.update_segment(target_segment)
 	push_warning("Did not yet reset object spawning")

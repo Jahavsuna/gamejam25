@@ -111,6 +111,10 @@ func draw_finish_line():
 	finish_line.position = Vector2(GameGlobals.screen_width / 2, GameGlobals.horizon_y)
 	add_child(finish_line)
 
+func update_segment(new_segment_idx: int):
+	active_segment = new_segment_idx
+	_load_nth_track_data(new_segment_idx)
+
 func _physics_process(delta: float) -> void:
 	# Avoid running this befor the function is ready
 	if not GameGlobals.is_screen_size_ready: return
