@@ -1,8 +1,8 @@
 import json
 
-def create_segment(segments_so_far):
+def create_segment_numeric(segments_so_far):
     """
-    Interactively creates a single segment dictionary based on user input.
+    Interactively creates a single segment dictionary using only numeric input.
     """
     segment = {}
 
@@ -22,14 +22,24 @@ def create_segment(segments_so_far):
         except ValueError:
             print("Invalid input. Please enter a number for dx.")
 
-    if input("Do you want to add objects to this segment? (yes/no): ").lower() == 'yes':
+    # Use numeric choices for "yes/no"
+    while True:
         objects = []
         loopzone_y_coords = []
+        object_type_map = {"1": "Gate", "2": "LoopZone", "3": "done"}
+        
         while True:
-            object_type = input("Enter object type ('Gate' or 'LoopZone', or 'done' to finish): ").lower()
-            if object_type == 'done':
+            print("\nSelect object type:")
+            for key, value in object_type_map.items():
+                if value != "done":
+                    print(f"  {key}: {value}")
+            print(f"  {len(object_type_map)}: Finish adding objects")
+
+            object_choice = input("Enter your choice: ")
+            
+            if object_choice == '3':
                 break
-            elif object_type == 'gate':
+            elif object_choice == '1': # Gate
                 while True:
                     try:
                         x = float(input("Enter Gate x coordinate: "))
@@ -38,7 +48,7 @@ def create_segment(segments_so_far):
                         break
                     except ValueError:
                         print("Invalid input. Please enter numbers for x and y.")
-            elif object_type == 'loopzone':
+            elif object_choice == '2': # LoopZone
                 while True:
                     try:
                         x = float(input("Enter LoopZone x coordinate: "))
@@ -62,7 +72,7 @@ def create_segment(segments_so_far):
                                 if target_segment > len(segments_so_far):
                                     print(f"Error: Target segment index {target_segment} is not smaller than the current segment index {len(segments_so_far)}. Please enter a smaller index.")
                                     continue
-                                if segments_so_far[target_segment]["dx"] != dx:
+                                if len(segments_so_far) != 0 and segments_so_far[target_segment]["dx"] != dx:
                                     print(f"Error: Target segment {target_segment} has a different dx ({segments_so_far[target_segment]['dx']}) than the current segment ({dx}). Please choose a target with the same dx.")
                                     continue
                                 break
@@ -75,7 +85,7 @@ def create_segment(segments_so_far):
                     except ValueError:
                         print("Invalid input. Please enter numbers for coordinates and integers for indices.")
             else:
-                print("Invalid object type. Please enter 'Gate' or 'LoopZone'.")
+                print("Invalid choice. Please enter 1, 2, or 3.")
         
         # Sort objects by their y-coordinate
         objects.sort(key=lambda item: item[2])
@@ -84,33 +94,31 @@ def create_segment(segments_so_far):
 
     return segment
 
-def generate_segments():
+def generate_segments_numeric():
     """
     Generates a list of segment dictionaries interactively and saves them to a JSON file.
+    All interactions are through numeric input.
     """
     segments = []
-    print("Starting interactive segment generation.")
+    print("Starting interactive segment generation (numeric input only).")
 
     while True:
-        segments.append(create_segment(segments))
-        if input("Add another segment? (yes/no): ").lower() != 'yes':
-            break
-
-    # After collecting all segments, validate LoopZone target segments
-    for i, segment in enumerate(segments):
-        if "objects" in segment:
-            for obj in segment["objects"]:
-                if obj[0] == "LoopZone":
-                    target_segment_index = obj[4]
-                    if target_segment_index >= i:
-                        print(f"Warning: In segment {i}, LoopZone target segment index {target_segment_index} is not smaller than the current segment index. This may cause issues.")
-                    if segments[target_segment_index]["dx"] != segment["dx"]:
-                        print(f"Warning: In segment {i}, LoopZone target segment {target_segment_index} has a different dx ({segments[target_segment_index]['dx']}) than the current segment ({segment['dx']}). This may cause issues.")
-
-    filename = input("Enter filename to save (e.g., 'level.json'): ")
-    with open(filename, 'w') as f:
-        json.dump(segments, f, indent=4)
-    print(f"Segments saved to {filename}")
+        print(f"\n--- Creating Segment {len(segments)} ---")
+        segments.append(create_segment_numeric(segments))
+        
+        while True:
+            add_another_choice = input("Add another segment? (1 for Yes, 2 for No): ")
+            if add_another_choice == '1':
+                break
+            elif add_another_choice == '2':
+                filename = input("Enter filename to save (e.g., 'level.json'): ")
+                with open(filename, 'w') as f:
+                    json.dump(segments, f, indent=4)
+                print(f"Segments saved to {filename}")
+                return
+            else:
+                print("Invalid choice. Please enter 1 or 2.")
 
 if __name__ == "__main__":
-    generate_segments()
+    generate_segments_numeric()
+
