@@ -59,7 +59,7 @@ def create_segment(segments_so_far):
                         while True:
                             try:
                                 target_segment = int(input("Enter LoopZone target segment index: "))
-                                if target_segment >= len(segments_so_far):
+                                if target_segment > len(segments_so_far):
                                     print(f"Error: Target segment index {target_segment} is not smaller than the current segment index {len(segments_so_far)}. Please enter a smaller index.")
                                     continue
                                 if segments_so_far[target_segment]["dx"] != dx:
