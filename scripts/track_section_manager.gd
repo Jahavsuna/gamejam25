@@ -6,7 +6,8 @@ enum Fields {type, x, track, safe, target}
 @onready var loop_line = preload("res://scenes/LoopLine.tscn")
 @onready var gate = preload("res://scenes/GateObstacle.tscn")
 
-const TRACK_DATA_FILE: String = "res://assets/tracks/first_level.json"
+const TRACK_DATA_FILE: String = "res://assets/tracks/level_1.json"
+
 var track_lines: Array[TrackLine] = []
 var track_data: Array = []
 var segment_ends: Array = []
