@@ -16,7 +16,7 @@ script = ExtResource("1_tp7al")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_yvgvb")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="DefeatText" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 480.0
@@ -31,6 +31,20 @@ For some reason it feels as though the streets keep repeating... Could I be doin
 
 
 
-[b]PRESS ANY KEY TO TRY AGAIN[/b]"
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 64.0
+offset_top = 360.0
+offset_right = 576.0
+offset_bottom = 440.0
+theme_override_fonts/bold_font = ExtResource("2_tp7al")
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[b]PRESS ANY KEY TO TRY AGAIN[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
