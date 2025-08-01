@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	
 	# The player also loses if they are dragged off-screen
 	var player_position = GameGlobals.get_player_screen_position()
-	if player_position.y > GameGlobals.screen_height:
+	if player_position.y > GameGlobals.screen_height - 120: # TODO offset by player size somehow
 		state = GameState.DEFEAT
 		print("Player dragged off-screen! state=" + str(state))
 		_apply_defeat()
