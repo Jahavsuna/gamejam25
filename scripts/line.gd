@@ -28,9 +28,9 @@ func _config_colors() -> void:
 	edge_color = Color.WHITE_SMOKE
 	road_color = Color.BLACK
 	if int(self.position.y / GameGlobals.LINE_COLOR_SWICTH) % 2 == 0:
-		outer_color = Color.DARK_SLATE_GRAY
+		outer_color = Color8(172, 125, 111, 255)
 	else:
-		outer_color = Color.SLATE_GRAY
+		outer_color = Color8(173, 85, 57, 255)
 
 func update_size() -> void:
 	var length_change = tan(VISION_ANGLE_RAD) * (GameGlobals.screen_height - self.position.y)
