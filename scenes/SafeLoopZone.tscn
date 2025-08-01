@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl5wqim5of42v"]
+
+[gd_scene load_steps=4 format=3 uid="uid://ceqcd2d07pcc8"]
 
 [ext_resource type="Script" uid="uid://cyv21xembf2na" path="res://scripts/loop_zone.gd" id="1_6u58d"]
-[ext_resource type="Texture2D" path="res://assets/textures/loop_gate.png" id="2_7vchw"]
+[ext_resource type="Texture2D" uid="uid://d1vr51ve83rij" path="res://assets/textures/loop_gate.png" id="2_7vchw"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hckj6"]
 size = Vector2(37, 12.5)

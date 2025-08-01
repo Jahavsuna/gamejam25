@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var loop_zone_scene = preload("res://scenes/LoopZone.tscn")
+@onready var loop_line = preload("res://scenes/LoopLine.tscn")
 @onready var gate = preload("res://scenes/GateObstacle.tscn")
 
 const TRACK_DATA_FILE: String = "res://assets/tracks/first_level.json"
@@ -10,11 +10,7 @@ var segment_ends: Array = []
 var active_segment = 0
 var lowest_line_idx: int = 0
 
-var track_object: Dictionary = {
-	'name': "",
-	'x': -20,
-	'y': -20,
-}
+
 
 const LineScene: PackedScene = preload("res://scenes/Line.tscn")
 
@@ -54,8 +50,10 @@ func _load_nth_track_data(n) -> void:
 	for obj in objects_arr:
 		var new_obj = null		
 		if obj[0] == "LoopZone":
-			new_obj = loop_zone_scene.instantiate()
-			new_obj.loop_to_segment = obj[3]
+			new_obj = loop_line.instantiate()
+			print(obj)
+			new_obj.loop_to_segment = int(obj[4])
+			new_obj.safe_zone = int(obj[3])
 		elif obj[0] == "Gate":
 			new_obj  = gate.instantiate()
 			

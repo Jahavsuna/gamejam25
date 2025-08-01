@@ -9,7 +9,7 @@ const LINE_COLOR_SWICTH: int = 30
 const TRACK_PER_SCREEN: float = 10.0
 
 var track_speed: int = 100
-var scale_rate: int = 1.8
+var scale_rate: int = 1.6
 var top_track_y: int = 200
 var player_node: Node2D = null
 var monster_node: Node2D = null
