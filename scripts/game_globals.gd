@@ -43,7 +43,7 @@ func register_player(player: Node2D) -> void:
 	player.z_index = 10	
 	print("Player registered")
 
-func get_player_track_coordinate() -> int:
+func get_player_track_coordinate() -> float:
 	if player_node == null:
 		push_error("Attempted to get player track_coord, but player doesn't exist.")
 	return player_node.track_coordinate
