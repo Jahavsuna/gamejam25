@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://cp4n4a46tu8ae" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://uwa2h6isly75" path="res://assets/textures/player_left.png" id="2_mdl7e"]
-[ext_resource type="Script" uid="uid://c71wkmbnv3ch5" path="res://scenes/character_body_2d.gd" id="3_cw2d6"]
+[ext_resource type="Script" path="res://scenes/character_body_2d.gd" id="3_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://dyrs0nf3tnqpi" path="res://assets/textures/player_right.png" id="3_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://b1xjfkh1xskos" path="res://assets/textures/player_straight.png" id="4_70d11"]
-[ext_resource type="Script" uid="uid://dcsn6h8jacwy8" path="res://scenes/player_anim_sprite.gd" id="6_70d11"]
+[ext_resource type="Script" path="res://scenes/player_anim_sprite.gd" id="6_70d11"]
 [ext_resource type="AudioStream" uid="uid://csrdljjmtdkrm" path="res://assets/click.wav" id="7_cw2d6"]
-[ext_resource type="Script" uid="uid://dewoch5k5jflb" path="res://scenes/audio_stream_player.gd" id="8_khinc"]
+[ext_resource type="Script" path="res://scenes/audio_stream_player.gd" id="8_khinc"]
 [ext_resource type="AudioStream" uid="uid://ckup2ekdvttfm" path="res://assets/breathing.mp3" id="9_bruh7"]
-[ext_resource type="Script" uid="uid://cbynknucrxgwn" path="res://scenes/audio_stream_player_2.gd" id="10_6eyey"]
+[ext_resource type="Script" path="res://scenes/audio_stream_player_2.gd" id="10_6eyey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
 size = Vector2(64.0625, 21.9375)

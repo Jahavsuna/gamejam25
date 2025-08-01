@@ -27,6 +27,13 @@ func _process(delta: float) -> void:
 		print("Player caught! state=" + str(state))
 		_apply_defeat()
 	
+	# The player also loses if they are dragged off-screen
+	var player_position = GameGlobals.get_player_screen_position()
+	if player_position.y > GameGlobals.screen_height:
+		state = GameState.DEFEAT
+		print("Player dragged off-screen! state=" + str(state))
+		_apply_defeat()
+	
 	# Check whether the player reached the track end
 	#if player_coordinate >= track_end: Return this later
 	if player_coordinate >= track_end-1000:

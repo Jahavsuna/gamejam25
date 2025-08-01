@@ -55,6 +55,11 @@ func get_player_track_coordinate() -> float:
 		return -1
 	return player_node.track_coordinate
 
+func get_player_screen_position() -> Vector2:
+	if player_node == null:
+		push_error("Attempted to get player track_coord, but player doesn't exist.")
+	return player_node.get_child(0).position
+
 func register_track(track: Node2D) -> void:
 	if track_node != null:
 		push_warning("A track node is already registered. Overwriting.")
