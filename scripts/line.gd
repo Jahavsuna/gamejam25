@@ -1,4 +1,5 @@
 extends Node2D
+class_name TrackLine
 
 const MIN_X = -100
 const MAX_X = 740 # 640 + 100
