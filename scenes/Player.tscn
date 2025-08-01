@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://dvxhj5hghp30r"]
+[gd_scene load_steps=28 format=3 uid="uid://dvxhj5hghp30r"]
 
 [ext_resource type="Script" uid="uid://cp4n4a46tu8ae" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://uwa2h6isly75" path="res://assets/textures/player_left.png" id="2_mdl7e"]
 [ext_resource type="Script" uid="uid://c71wkmbnv3ch5" path="res://scenes/character_body_2d.gd" id="3_cw2d6"]
+[ext_resource type="AudioStream" uid="uid://ooqadt61kvhr" path="res://assets/hitHurt.mp3" id="3_d3wef"]
 [ext_resource type="Texture2D" uid="uid://dyrs0nf3tnqpi" path="res://assets/textures/player_right.png" id="3_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://b1xjfkh1xskos" path="res://assets/textures/player_straight.png" id="4_70d11"]
 [ext_resource type="Script" uid="uid://dcsn6h8jacwy8" path="res://scenes/player_anim_sprite.gd" id="6_70d11"]
@@ -148,6 +149,10 @@ script = ExtResource("1_p0vlq")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("3_cw2d6")
+
+[node name="HitPlayer" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("3_d3wef")
+volume_db = -17.214
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0.78125, 0.03125)
