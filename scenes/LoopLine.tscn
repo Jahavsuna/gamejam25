@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=8 format=3 uid="uid://cgt6wedw7h0ds"]
 
 [ext_resource type="PackedScene" uid="uid://c1856necid8n0" path="res://scenes/LoopZone.tscn" id="1_g2f6g"]
@@ -6,6 +7,7 @@
 [ext_resource type="Script" uid="uid://5xd7p33cj0fu" path="res://scenes/loop_zone.gd" id="3_6c0g2"]
 [ext_resource type="Script" uid="uid://dlfkmcuu8fi2g" path="res://scenes/loop_zone_2.gd" id="4_rxrko"]
 [ext_resource type="Script" uid="uid://dufd171cfu7ty" path="res://scenes/safe_loop_zone_3.gd" id="6_jcvdg"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jcvdg"]
 size = Vector2(5, 20)
