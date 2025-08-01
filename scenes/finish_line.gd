@@ -4,7 +4,7 @@ class_name FinishLine
 func _process(delta: float) -> void:
 	var speed = GameGlobals.track_speed	
 	self.position.y += speed * delta
-	if self.position.y < GameGlobals.top_track_y: return
+	if self.position.y < GameGlobals.horizon_y: return
 	self.visible = true
 
 	
