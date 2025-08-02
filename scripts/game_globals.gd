@@ -94,7 +94,6 @@ func get_line_by_y(y: float) -> TrackLine:
 		if curr_line_dist < nearest_line_dist:
 			closest_line = line
 			nearest_line_dist = curr_line_dist
-	print("minimal line distance: " + str(nearest_line_dist))
 	return closest_line
 
 func perform_loop(target_segment: int) -> void:
