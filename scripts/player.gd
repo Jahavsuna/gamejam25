@@ -9,8 +9,15 @@ var player_track_v: float = STANDARD_TRACK_V
 var track_coordinate: float = 0
 var direction:Vector2 = Vector2.ZERO
 
+var MonsterClaws: Sprite2D
+var claws_initial_y: float
+var claws_final_y: float = 20.0
+
 func _ready() -> void:
 	GameGlobals.register_player(self)
+	MonsterClaws = $CharacterBody2D/MonsterClaws
+	claws_initial_y = MonsterClaws.position.y
+	MonsterClaws.modulate.a = 0.0
 	print("Player initialized")
 
 func _physics_process(delta: float) -> void:
@@ -23,6 +30,15 @@ func _get_player_feet_position() -> Vector2:
 	var scaled_body_position = self.scale * character_body_position
 	var player_feet = original_position + scaled_body_position
 	return player_feet
+
+func _set_claws_properties() -> void:
+	var monster_distance = track_coordinate - GameGlobals.get_monster_track_coordinate()
+	var init_distance = GameGlobals.monster_node.INITIAL_GAP
+	var advance_fraction = 1.0 - monster_distance / init_distance
+	var new_alpha = advance_fraction * 1.0 # Since alpha in [0,1]
+	var new_pos = advance_fraction * (claws_final_y - claws_initial_y) + claws_initial_y
+	MonsterClaws.modulate.a = new_alpha
+	MonsterClaws.position.y = new_pos
 
 func _process(_delta: float):
 	# Check if player is on road sides
@@ -48,4 +64,7 @@ func _process(_delta: float):
 			self.direction.y -= GameGlobals.get_player_track_velocity() + player_v
 		if Input.is_action_pressed("ui_down"):
 			self.direction.y += player_v
-			
+	
+	# Make monster more visible and closer the closer it is
+	_set_claws_properties()
+	
