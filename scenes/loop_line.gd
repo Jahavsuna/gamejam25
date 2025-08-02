@@ -4,7 +4,8 @@ var safe_zone:int = 1
 var loop_to_segment:int = 0
 
 func _process(delta: float) -> void:
-	var speed = GameGlobals.track_speed	
+	# Update position
+	var speed = GameGlobals.track_speed
 	self.position.y += speed * delta
 	if self.position.y < GameGlobals.horizon_y: return
 	self.visible = true

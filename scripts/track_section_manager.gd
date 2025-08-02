@@ -80,8 +80,17 @@ func _create_object(obj: Array) -> void:
 	if new_obj:
 		new_obj.visibility_layer = 100000;
 		new_obj.z_index = 1000
-		new_obj.position = Vector2(obj[Fields.x] + GameGlobals.screen_width/2.0, GameGlobals.horizon_y)
-	#new_obj.visible=false
+		# The initial position should be a projection of the final position
+		var y_dist = GameGlobals.screen_height - GameGlobals.horizon_y
+		var projection_angle = GameGlobals.VISION_ANGLE_RAD
+		var x_offset = y_dist * tan(projection_angle)
+		if obj[Fields.x] > 0:
+			x_offset *= -1
+		# Patch, need to work out the math
+		if obj[Fields.x] == 0:
+			x_offset = 0
+		var x_screen_coord = obj[Fields.x] + GameGlobals.screen_width / 2.0 + x_offset
+		new_obj.position = Vector2(x_screen_coord, GameGlobals.horizon_y)
 	add_child(new_obj)
 
 func _generate_track() -> void:	
