@@ -59,7 +59,7 @@ func _load_nth_track_data(n) -> void:
 		var drawn = 0
 		objects_in_segment.append([new_obj, drawn])
 
-func _get_next_track_object() -> int:
+func _get_idx_next_track_object() -> int:
 	for i_obj_desc in objects_in_segment.size():
 		var obj_desc = objects_in_segment[i_obj_desc]
 		if obj_desc[1] == 0:
@@ -166,7 +166,7 @@ func _physics_process(delta: float) -> void:
 		line.update_size()
 	
 	# Check if next object need to be instantiated
-	var next_obj_idx = _get_next_track_object()
+	var next_obj_idx = _get_idx_next_track_object()
 	if next_obj_idx != -1:
 		var next_obj = objects_in_segment[next_obj_idx][0]
 		if next_obj[Fields.track] <= start_coordinate + GameGlobals.LINES_PER_SCREEN:
