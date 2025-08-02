@@ -34,7 +34,7 @@ func get_left_outer_end() -> float:
 
 func _config_colors() -> void:
 	edge_color = Color.WHITE_SMOKE
-	road_color = Color.BLACK
+	road_color = Color("#800000")
 	if int(self.position.y / GameGlobals.LINE_COLOR_SWICTH) % 2 == 0:
 		outer_color = Color8(172, 125, 111, 255)
 	else:
