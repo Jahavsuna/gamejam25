@@ -1,15 +1,17 @@
 extends Node2D
 
 func _calc_position_offset(delta: float) -> Vector2:
+	# Get y-offset
 	var track_speed = GameGlobals.track_speed
 	var y_offset = track_speed * delta
 	var projective_x_offset = y_offset * tan(GameGlobals.VISION_ANGLE_RAD)
 	
-	
-	#TODO: objects to the left of center of road, not screen
 	# Objects to the left of the screen center move left, objects to the right move right.
-	var approximate_line = GameGlobals.get_line_by_y(self.position.y)
-	if self.position.x < approximate_line.get_center():
+	var sprite: Sprite2D = $Sprite2D
+	var object_bottom_y = self.position.y + sprite.get_rect().size.y
+	var approximate_line = GameGlobals.get_line_by_y(object_bottom_y)
+	var my_center_x = self.position.x + (sprite.get_rect().size.x / 2)
+	if my_center_x < approximate_line.get_center():
 		projective_x_offset *= -1
 	
 	# x_offset is modified by the current segment's dx
@@ -19,6 +21,7 @@ func _calc_position_offset(delta: float) -> Vector2:
 	var passed_lines = curr_road_fraction - next_road_fraction
 	var offset_from_dx = -curr_dx * passed_lines
 	
+	# Return offset vector
 	var offset_vec = Vector2(projective_x_offset + offset_from_dx, y_offset)
 	return offset_vec
 

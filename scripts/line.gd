@@ -24,7 +24,7 @@ func _ready() -> void:
 	queue_redraw()
 
 func get_center() -> float:
-	return outer_width + edge_width + (road_width / 2.0) + x_offset + abs(MIN_X)
+	return outer_width + edge_width + (road_width / 2.0) + x_offset
 
 func _config_colors() -> void:
 	edge_color = Color.WHITE_SMOKE
