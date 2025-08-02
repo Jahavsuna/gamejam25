@@ -23,9 +23,18 @@ const MAX_X = 740 # 640 + 100
 func _ready() -> void:
 	queue_redraw()
 
+func get_center() -> float:
+	return outer_width + edge_width + (road_width / 2.0) + x_offset
+
+func get_right_outer_start() -> float:
+	return outer_width + 2 * edge_width + road_width + x_offset
+
+func get_left_outer_end() -> float:
+	return outer_width + x_offset
+
 func _config_colors() -> void:
 	edge_color = Color.WHITE_SMOKE
-	road_color = Color.BLACK
+	road_color = Color("#800000")
 	if int(self.position.y / GameGlobals.LINE_COLOR_SWICTH) % 2 == 0:
 		outer_color = Color8(172, 125, 111, 255)
 	else:

@@ -5,7 +5,7 @@ var loop_to_segment:int = 0
 
 func _process(delta: float) -> void:
 	# Update position
-	var speed = GameGlobals.track_speed
+	var speed = GameGlobals.get_player_track_velocity()
 	self.position.y += speed * delta
 	if self.position.y < GameGlobals.horizon_y: return
 	self.visible = true

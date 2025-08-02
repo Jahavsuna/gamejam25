@@ -90,6 +90,11 @@ func _create_object(obj: Array) -> void:
 		if obj[Fields.x] == 0:
 			x_offset = 0
 		var x_screen_coord = obj[Fields.x] + GameGlobals.screen_width / 2.0 + x_offset
+		
+		# Also need to offset by current dx
+		var offset_from_dx = track_data[active_segment]["dx"] * GameGlobals.LINES_PER_SCREEN
+		
+		x_screen_coord += offset_from_dx
 		new_obj.position = Vector2(x_screen_coord, GameGlobals.horizon_y)
 	add_child(new_obj)
 
@@ -130,7 +135,7 @@ func _physics_process(delta: float) -> void:
 	if not GameGlobals.is_screen_size_ready: return
 	
 	# Get player data and advance segment if needed
-	var translation_speed = GameGlobals.track_speed
+	var translation_speed = GameGlobals.get_player_track_velocity()
 	var start_coordinate = GameGlobals.get_player_track_coordinate()
 	if start_coordinate > segment_ends[active_segment]:
 		print("Segment advanced!")
