@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _volume_db_from_coordinate_delta(dist: float) -> float:
 	# Real sound decays like r^2. In dB, that means A-20log(r)
-	var distance_ratio = max(0.0, (dist - MAX_VOLUME_BUFFER) / (INITIAL_GAP - MAX_VOLUME_BUFFER))
+	var distance_ratio = max(0.0, (dist - MAX_VOLUME_BUFFER) / INITIAL_GAP)
 	var gain = -20 * (log(distance_ratio) / log(10))
 	return MIN_VOLUME + gain
 
