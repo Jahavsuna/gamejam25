@@ -26,6 +26,12 @@ func _ready() -> void:
 func get_center() -> float:
 	return outer_width + edge_width + (road_width / 2.0) + x_offset
 
+func get_right_outer_start() -> float:
+	return outer_width + 2 * edge_width + road_width + x_offset
+
+func get_left_outer_end() -> float:
+	return outer_width + x_offset
+
 func _config_colors() -> void:
 	edge_color = Color.WHITE_SMOKE
 	road_color = Color.BLACK
