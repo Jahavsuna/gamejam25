@@ -9,7 +9,6 @@ const LINE_COLOR_SWICTH: int = 30
 const TRACK_PER_SCREEN: float = 10.0
 const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 
-#var track_speed: float = 100
 var scale_rate: float = 1.3
 var player_node: PlayerNode = null
 var monster_node: MonsterNode = null
