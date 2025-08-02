@@ -10,7 +10,7 @@ const TRACK_PER_SCREEN: float = 10.0
 const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 
 var track_speed: float = 100
-var scale_rate: float = 1.6
+var scale_rate: float = 1.3
 var player_node: PlayerNode = null
 var monster_node: MonsterNode = null
 var track_node: TrackMgr = null
@@ -71,6 +71,24 @@ func get_track_end_coordinate() -> float:
 		push_error("Attempted to get track end coordinate, but track doesn't exist.")
 		return -1
 	return track_node.segment_ends[-1]
+
+func get_current_dx() -> float:
+	if track_node == null:
+		push_error("Attempted to get track dx, but track isn't registered in Globals.")
+		return -1.0
+	return track_node.track_data[track_node.active_segment]["dx"]
+
+func get_road_fraction(position_y: float) -> float:
+	return (screen_height - position_y) / (screen_height - horizon_y)
+
+func get_line_by_y(y: float) -> TrackLine:
+	var closest_line: TrackLine = track_node.track_lines[0]
+	var nearest_line_dist = screen_height
+	for line in track_node.track_lines:
+		var curr_line_dist = abs(line.position.y - y)
+		if curr_line_dist < nearest_line_dist:
+			closest_line = line
+	return closest_line
 
 func perform_loop(target_segment: int) -> void:
 	var new_player_coord = track_node.segment_starts[target_segment]

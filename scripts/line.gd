@@ -23,6 +23,9 @@ const MAX_X = 740 # 640 + 100
 func _ready() -> void:
 	queue_redraw()
 
+func get_center() -> float:
+	return outer_width + edge_width + (road_width / 2.0) + x_offset + abs(MIN_X)
+
 func _config_colors() -> void:
 	edge_color = Color.WHITE_SMOKE
 	road_color = Color.BLACK
