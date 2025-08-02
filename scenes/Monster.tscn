@@ -8,10 +8,10 @@
 [node name="Monster" type="Node2D"]
 script = ExtResource("1_xquod")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="KnifeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ulq6r")
 volume_db = 1.514
 script = ExtResource("2_ybq8a")
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="NyxSound" type="AudioStreamPlayer" parent="."]
 script = ExtResource("4_udqn3")

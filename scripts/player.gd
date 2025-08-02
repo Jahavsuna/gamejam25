@@ -1,18 +1,56 @@
 extends Node2D
 class_name PlayerNode
 
-var player_v:float = 60
+const STANDARD_TRACK_V: float = 100
+const SLOW_TRACK_V: float = 60
+
+var player_v: float = 60
+var player_track_v: float = STANDARD_TRACK_V
 var track_coordinate: float = 0
 var direction:Vector2 = Vector2.ZERO
 
+var MonsterClaws: Sprite2D
+var claws_initial_y: float
+var claws_final_y: float = 20.0
+
 func _ready() -> void:
 	GameGlobals.register_player(self)
+	MonsterClaws = $CharacterBody2D/MonsterClaws
+	claws_initial_y = MonsterClaws.position.y
+	MonsterClaws.modulate.a = 0.0
 	print("Player initialized")
 
 func _physics_process(delta: float) -> void:
-	track_coordinate += GameGlobals.track_speed * delta
+	track_coordinate += GameGlobals.get_player_track_velocity() * delta
+
+# Oh no we are now paying the price for not knowing Godot in the beginning
+func _get_player_feet_position() -> Vector2: 
+	var original_position = self.position
+	var character_body_position = self.get_child(0).position
+	var scaled_body_position = self.scale * character_body_position
+	var player_feet = original_position + scaled_body_position
+	return player_feet
+
+func _set_claws_properties() -> void:
+	var monster_distance = track_coordinate - GameGlobals.get_monster_track_coordinate()
+	var init_distance = GameGlobals.monster_node.INITIAL_GAP
+	var advance_fraction = 1.0 - monster_distance / init_distance
+	var new_alpha = advance_fraction * 1.0 # Since alpha in [0,1]
+	var new_pos = advance_fraction * (claws_final_y - claws_initial_y) + claws_initial_y
+	MonsterClaws.modulate.a = new_alpha
+	MonsterClaws.position.y = new_pos
 
 func _process(_delta: float):
+	# Check if player is on road sides
+	var player_feet = _get_player_feet_position()
+	var approximate_line = GameGlobals.get_line_by_y(player_feet.y)
+	var player_left_of_track:  bool = player_feet.x < approximate_line.get_left_outer_end()
+	var player_right_of_track: bool = player_feet.x > approximate_line.get_right_outer_start()
+	if player_left_of_track or player_right_of_track:
+		player_track_v = SLOW_TRACK_V
+	else:
+		player_track_v = STANDARD_TRACK_V
+	
 	direction = Vector2.ZERO
 	# Detect continuous movement input using UI actions (configured in Project Settings -> Input Map)
 	if Input.is_action_pressed("ui_left"):
@@ -20,10 +58,13 @@ func _process(_delta: float):
 	if Input.is_action_pressed("ui_right"):
 		self.direction.x += player_v
 	
-	self.direction.y += GameGlobals.track_speed
+	self.direction.y += GameGlobals.get_player_track_velocity()
 	if GameGlobals.DEBUG:
 		if Input.is_action_pressed("ui_up"):
-			self.direction.y -= GameGlobals.track_speed + player_v
+			self.direction.y -= GameGlobals.get_player_track_velocity() + player_v
 		if Input.is_action_pressed("ui_down"):
 			self.direction.y += player_v
-			
+	
+	# Make monster more visible and closer the closer it is
+	_set_claws_properties()
+	

@@ -59,7 +59,7 @@ func _load_nth_track_data(n) -> void:
 		var drawn = 0
 		objects_in_segment.append([new_obj, drawn])
 
-func _get_next_track_object() -> int:
+func _get_idx_next_track_object() -> int:
 	for i_obj_desc in objects_in_segment.size():
 		var obj_desc = objects_in_segment[i_obj_desc]
 		if obj_desc[1] == 0:
@@ -80,8 +80,22 @@ func _create_object(obj: Array) -> void:
 	if new_obj:
 		new_obj.visibility_layer = 100000;
 		new_obj.z_index = 1000
-		new_obj.position = Vector2(obj[Fields.x] + GameGlobals.screen_width/2.0, GameGlobals.horizon_y)
-	#new_obj.visible=false
+		# The initial position should be a projection of the final position
+		var y_dist = GameGlobals.screen_height - GameGlobals.horizon_y
+		var projection_angle = GameGlobals.VISION_ANGLE_RAD
+		var x_offset = y_dist * tan(projection_angle)
+		if obj[Fields.x] > 0:
+			x_offset *= -1
+		# Patch, need to work out the math
+		if obj[Fields.x] == 0:
+			x_offset = 0
+		var x_screen_coord = obj[Fields.x] + GameGlobals.screen_width / 2.0 + x_offset
+		
+		# Also need to offset by current dx
+		var offset_from_dx = track_data[active_segment]["dx"] * GameGlobals.LINES_PER_SCREEN
+		
+		x_screen_coord += offset_from_dx
+		new_obj.position = Vector2(x_screen_coord, GameGlobals.horizon_y)
 	add_child(new_obj)
 
 func _generate_track() -> void:	
@@ -121,7 +135,7 @@ func _physics_process(delta: float) -> void:
 	if not GameGlobals.is_screen_size_ready: return
 	
 	# Get player data and advance segment if needed
-	var translation_speed = GameGlobals.track_speed
+	var translation_speed = GameGlobals.get_player_track_velocity()
 	var start_coordinate = GameGlobals.get_player_track_coordinate()
 	if start_coordinate > segment_ends[active_segment]:
 		print("Segment advanced!")
@@ -166,7 +180,7 @@ func _physics_process(delta: float) -> void:
 		line.update_size()
 	
 	# Check if next object need to be instantiated
-	var next_obj_idx = _get_next_track_object()
+	var next_obj_idx = _get_idx_next_track_object()
 	if next_obj_idx != -1:
 		var next_obj = objects_in_segment[next_obj_idx][0]
 		if next_obj[Fields.track] <= start_coordinate + GameGlobals.LINES_PER_SCREEN:

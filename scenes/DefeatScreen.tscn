@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dha27bccu4ey8"]
+[gd_scene load_steps=5 format=3 uid="uid://dha27bccu4ey8"]
 
 [ext_resource type="Script" uid="uid://wds7wm7jm0bg" path="res://scenes/defeat_screen.gd" id="1_tp7al"]
 [ext_resource type="Texture2D" uid="uid://bcnxf2wyufgkv" path="res://assets/textures/sky.jpg" id="1_yvgvb"]
 [ext_resource type="FontFile" uid="uid://6hifseux5xs0" path="res://assets/font_VT323/VT323-Regular.ttf" id="2_tp7al"]
+[ext_resource type="AudioStream" uid="uid://ctq4cuc7sg5wp" path="res://assets/sounds/evil_laugh.wav" id="4_vrsgx"]
 
 [node name="DefeatScreen" type="Control"]
 layout_mode = 3
@@ -48,3 +49,7 @@ bbcode_enabled = true
 text = "[b]PRESS ANY KEY TO TRY AGAIN[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LoseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vrsgx")
+volume_db = 15.0

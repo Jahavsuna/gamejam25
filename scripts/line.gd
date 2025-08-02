@@ -3,7 +3,6 @@ class_name TrackLine
 
 const MIN_X = -100
 const MAX_X = 740 # 640 + 100
-const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 
 @export var base_outer_width: float = 90
 @export var base_edge_width: float = 20
@@ -24,16 +23,25 @@ const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 func _ready() -> void:
 	queue_redraw()
 
+func get_center() -> float:
+	return outer_width + edge_width + (road_width / 2.0) + x_offset
+
+func get_right_outer_start() -> float:
+	return outer_width + 2 * edge_width + road_width + x_offset
+
+func get_left_outer_end() -> float:
+	return outer_width + x_offset
+
 func _config_colors() -> void:
 	edge_color = Color.WHITE_SMOKE
-	road_color = Color.BLACK
+	road_color = Color("#800000")
 	if int(self.position.y / GameGlobals.LINE_COLOR_SWICTH) % 2 == 0:
 		outer_color = Color8(172, 125, 111, 255)
 	else:
 		outer_color = Color8(173, 85, 57, 255)
 
 func update_size() -> void:
-	var length_change = tan(VISION_ANGLE_RAD) * (GameGlobals.screen_height - self.position.y)
+	var length_change = tan(GameGlobals.VISION_ANGLE_RAD) * (GameGlobals.screen_height - self.position.y)
 	outer_width = base_outer_width + length_change
 	road_width = base_road_width - 2 * length_change
 	queue_redraw()
