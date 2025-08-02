@@ -1,7 +1,11 @@
 extends Node2D
 class_name PlayerNode
 
-var player_v:float = 60
+const STANDARD_TRACK_V: float = 100
+const SLOW_TRACK_V: float = 60
+
+var player_v: float = 60
+var player_track_v: float = STANDARD_TRACK_V
 var track_coordinate: float = 0
 var direction:Vector2 = Vector2.ZERO
 
@@ -10,7 +14,8 @@ func _ready() -> void:
 	print("Player initialized")
 
 func _physics_process(delta: float) -> void:
-	track_coordinate += GameGlobals.track_speed * delta
+	track_coordinate += GameGlobals.get_player_track_velocity() * delta
+
 
 func _process(_delta: float):
 	direction = Vector2.ZERO
@@ -20,10 +25,10 @@ func _process(_delta: float):
 	if Input.is_action_pressed("ui_right"):
 		self.direction.x += player_v
 	
-	self.direction.y += GameGlobals.track_speed
+	self.direction.y += GameGlobals.get_player_track_velocity()
 	if GameGlobals.DEBUG:
 		if Input.is_action_pressed("ui_up"):
-			self.direction.y -= GameGlobals.track_speed + player_v
+			self.direction.y -= GameGlobals.get_player_track_velocity() + player_v
 		if Input.is_action_pressed("ui_down"):
 			self.direction.y += player_v
 			

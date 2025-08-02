@@ -2,7 +2,7 @@ extends Node2D
 class_name FinishLine
 
 func _process(delta: float) -> void:
-	var speed = GameGlobals.track_speed	
+	var speed = GameGlobals.get_player_track_velocity()
 	self.position.y += speed * delta
 	if self.position.y < GameGlobals.horizon_y: return
 	self.visible = true

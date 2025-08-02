@@ -2,7 +2,7 @@ extends Node2D
 
 func _calc_position_offset(delta: float) -> Vector2:
 	# Get y-offset
-	var track_speed = GameGlobals.track_speed
+	var track_speed = GameGlobals.get_player_track_velocity()
 	var y_offset = track_speed * delta
 	var projective_x_offset = y_offset * tan(GameGlobals.VISION_ANGLE_RAD)
 	

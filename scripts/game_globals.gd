@@ -9,7 +9,7 @@ const LINE_COLOR_SWICTH: int = 30
 const TRACK_PER_SCREEN: float = 10.0
 const VISION_ANGLE_RAD: float = 25 * 3.14 / 180
 
-var track_speed: float = 100
+#var track_speed: float = 100
 var scale_rate: float = 1.3
 var player_node: PlayerNode = null
 var monster_node: MonsterNode = null
@@ -59,6 +59,11 @@ func get_player_screen_position() -> Vector2:
 	if player_node == null:
 		push_error("Attempted to get player track_coord, but player doesn't exist.")
 	return player_node.get_child(0).position
+
+func get_player_track_velocity() -> float:
+	if player_node == null:
+		push_error("Attempted to get player track_v, but player doesn't exist.")
+	return player_node.player_track_v
 
 func register_track(track: Node2D) -> void:
 	if track_node != null:

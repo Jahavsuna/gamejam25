@@ -135,7 +135,7 @@ func _physics_process(delta: float) -> void:
 	if not GameGlobals.is_screen_size_ready: return
 	
 	# Get player data and advance segment if needed
-	var translation_speed = GameGlobals.track_speed
+	var translation_speed = GameGlobals.get_player_track_velocity()
 	var start_coordinate = GameGlobals.get_player_track_coordinate()
 	if start_coordinate > segment_ends[active_segment]:
 		print("Segment advanced!")
