@@ -172,7 +172,8 @@ func _physics_process(delta: float) -> void:
 	var next_obj_idx = _get_idx_next_track_object()
 	if next_obj_idx != -1:
 		var next_obj = objects_in_segment[next_obj_idx][0]
-		if next_obj[Fields.track] <= start_coordinate + GameGlobals.LINES_PER_SCREEN:
+		var segment_dist = start_coordinate - segment_starts[active_segment]
+		if next_obj[Fields.track] <= segment_dist + GameGlobals.TRACK_PER_SCREEN:
 			# Need to instantiate the object
 			_create_object(next_obj)
 			objects_in_segment[next_obj_idx][1] = 1
