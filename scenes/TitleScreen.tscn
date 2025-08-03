@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dr2lhlwku6hsc" path="res://scenes/title_screen.gd" id="1_qyuap"]
 [ext_resource type="Texture2D" uid="uid://bcnxf2wyufgkv" path="res://assets/textures/sky.jpg" id="2_ch40n"]
 [ext_resource type="FontFile" uid="uid://6hifseux5xs0" path="res://assets/font_VT323/VT323-Regular.ttf" id="2_dfj8j"]
-[ext_resource type="PackedScene" uid="uid://dxv0a14u65dt7" path="res://scenes/LoopLine_texture_only.tscn" id="4_8k5og"]
+[ext_resource type="PackedScene" uid="uid://g8404pay3lee" path="res://scenes/LoopLine_texture_only.tscn" id="4_8k5og"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
