@@ -15,9 +15,6 @@ func _calc_position_offset(delta: float) -> Vector2:
 	if my_center_x < approximate_line.get_center():
 		projective_x_offset *= -1
 	
-	# x_offset is modified by the current segment's dx
-	var curr_dx = GameGlobals.get_current_dx()
-	
 	var curr_road_line = GameGlobals.get_line_by_y(self.position.y)
 	var next_road_line = GameGlobals.get_line_by_y(self.position.y + y_offset)
 	var offset_from_dx = next_road_line.x_offset - curr_road_line.x_offset
