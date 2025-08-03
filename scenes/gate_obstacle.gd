@@ -16,10 +16,10 @@ func _calc_position_offset(delta: float) -> Vector2:
 	
 	# x_offset is modified by the current segment's dx
 	var curr_dx = GameGlobals.get_current_dx()
-	var curr_road_fraction = GameGlobals.get_road_fraction(self.position.y)
-	var next_road_fraction = GameGlobals.get_road_fraction(self.position.y + y_offset)
-	var passed_lines = curr_road_fraction - next_road_fraction
-	var offset_from_dx = -curr_dx * passed_lines
+	
+	var curr_road_line = GameGlobals.get_line_by_y(self.position.y)
+	var next_road_line = GameGlobals.get_line_by_y(self.position.y + y_offset)
+	var offset_from_dx = next_road_line.x_offset - curr_road_line.x_offset
 	
 	# Return offset vector
 	var offset_vec = Vector2(projective_x_offset + offset_from_dx, y_offset)
