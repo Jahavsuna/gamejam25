@@ -80,21 +80,10 @@ func _create_object(obj: Array) -> void:
 	if new_obj:
 		new_obj.visibility_layer = 100000;
 		new_obj.z_index = 1000
-		# The initial position should be a projection of the final position
-		var y_dist = GameGlobals.screen_height - GameGlobals.horizon_y
-		var projection_angle = GameGlobals.VISION_ANGLE_RAD
-		var x_offset = y_dist * tan(projection_angle)
-		if obj[Fields.x] > 0:
-			x_offset *= -1
-		# Patch, need to work out the math
-		if obj[Fields.x] == 0:
-			x_offset = 0
-		var x_screen_coord = obj[Fields.x] + GameGlobals.screen_width / 2.0 + x_offset
+		var object_x = obj[Fields.x]
+		var horizon_line = GameGlobals.get_line_by_y(GameGlobals.horizon_y)
+		var x_screen_coord = object_x + horizon_line.get_center()
 		
-		# Also need to offset by current dx
-		var offset_from_dx = track_data[active_segment]["dx"] * GameGlobals.LINES_PER_SCREEN
-		
-		x_screen_coord += offset_from_dx
 		new_obj.position = Vector2(x_screen_coord, GameGlobals.horizon_y)
 	add_child(new_obj)
 

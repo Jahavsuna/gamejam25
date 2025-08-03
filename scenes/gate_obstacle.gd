@@ -11,6 +11,7 @@ func _calc_position_offset(delta: float) -> Vector2:
 	var object_bottom_y = self.position.y + sprite.get_rect().size.y
 	var approximate_line = GameGlobals.get_line_by_y(object_bottom_y)
 	var my_center_x = self.position.x + (sprite.get_rect().size.x / 2)
+	#draw_line(Vector2(my_center_x - 10, object_bottom_y), Vector2(my_center_x + 10, object_bottom_y), Color.WHITE)
 	if my_center_x < approximate_line.get_center():
 		projective_x_offset *= -1
 	
